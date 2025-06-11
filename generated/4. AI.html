@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Entity Components | Blastback Scripting Reference </title>
+      <title>Behavior Tree based AI | Blastback Scripting Reference </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Entity Components | Blastback Scripting Reference ">
+      <meta name="title" content="Behavior Tree based AI | Blastback Scripting Reference ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/jaschez/blastback-docs/blob/main/scripting/generated/Entity_Components.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/jaschez/blastback-docs/blob/main/scripting/generated/4. AI.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -85,15 +85,24 @@
         </div>
 
         <article data-uid="">
-<h1 id="entity-components">Entity Components</h1>
+<h1 id="behavior-tree-based-ai">Behavior Tree based AI</h1>
 
-<p>Here is a component schema</p>
+<p>The Blastback Engine makes use of behavior trees (BTs) as an entry point to provide entities with automatic behaviors.</p>
+<p>AI properties are applied to entities via the <a href="ai.html">AI Component</a>.</p>
+<p>To define the structure of a BT we use <strong>nodes</strong> that feed the tree with basic behaviors.</p>
+<h2 id="behavior-tree-node-structure">Behavior Tree Node Structure</h2>
 <pre><code>{
-	&quot;commandMap&quot;: {
+	&quot;type&quot;: &quot;...&quot;,
+	&quot;commands&quot;: [...],
+	&quot;children&quot;: {
+		...
+	},
+	&quot;parameters&quot;: {
 		...
 	}
 }
 </code></pre>
+<p>Defines a single node from the behavior tree</p>
 <h2 id="fields">Fields</h2>
 <table>
 <thead>
@@ -105,58 +114,36 @@
 </thead>
 <tbody>
 <tr>
-<td>commandMap</td>
-<td>Dictionary { string, string }</td>
+<td>type</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>commands</td>
+<td>string[]</td>
+<td></td>
+</tr>
+<tr>
+<td>children</td>
+<td>Dictionary { string, Blastback.Source.Models.AI.BTNodeModel }</td>
+<td></td>
+</tr>
+<tr>
+<td>parameters</td>
+<td>Dictionary { string, Object }</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<h2 id="common-components">Common components</h2>
-<ul>
-<li><a href="animatorTrigger.html">animatorTrigger</a></li>
-<li><a href="input.html">input</a></li>
-<li><a href="spawner.html">spawner</a></li>
-<li><a href="trigger.html">trigger</a></li>
-</ul>
-<h2 id="mob-components">Mob components</h2>
-<ul>
-<li><a href="InteractionHandlerMobComponent.html">InteractionHandlerMobComponent</a></li>
-<li><a href="MobComponentModel.html">MobComponentModel</a></li>
-<li><a href="LevitationMobComponent.html">LevitationMobComponent</a></li>
-<li><a href="MovementComponentModel.html">MovementComponentModel</a></li>
-<li><a href="PlayerMovementMobComponent.html">PlayerMovementMobComponent</a></li>
-<li><a href="SteeringMovementComponentModel.html">SteeringMovementComponentModel</a></li>
-<li><a href="WeaponHandlerComponentModel.html">WeaponHandlerComponentModel</a></li>
-<li><a href="ai.html">ai</a></li>
-<li><a href="ControlHandlerMobComponent.html">ControlHandlerMobComponent</a></li>
-</ul>
-<h2 id="weapon-components">Weapon components</h2>
-<ul>
-<li><a href="MeleeComponentModel.html">MeleeComponentModel</a></li>
-<li><a href="RideableShooterComponent.html">RideableShooterComponent</a></li>
-<li><a href="ShooterComponentModel.html">ShooterComponentModel</a></li>
-<li><a href="WeaponComponentModel.html">WeaponComponentModel</a></li>
-</ul>
-<h2 id="ui-components">UI components</h2>
-<ul>
-<li><a href="BarGroupUIComponent.html">BarGroupUIComponent</a></li>
-<li><a href="BarUIComponent.html">BarUIComponent</a></li>
-<li><a href="ButtonUIComponent.html">ButtonUIComponent</a></li>
-<li><a href="ComicUIComponent.html">ComicUIComponent</a></li>
-<li><a href="ImageUIComponent.html">ImageUIComponent</a></li>
-<li><a href="InputTriggerUIComponent.html">InputTriggerUIComponent</a></li>
-<li><a href="SelectionGroupUIComponent.html">SelectionGroupUIComponent</a></li>
-<li><a href="TextUIComponent.html">TextUIComponent</a></li>
-<li><a href="UIEntityComponent.html">UIEntityComponent</a></li>
-<li><a href="UpgradeGroupUIComponent.html">UpgradeGroupUIComponent</a></li>
-<li><a href="WanderUIComponent.html">WanderUIComponent</a></li>
-<li><a href="WaverUIComponent.html">WaverUIComponent</a></li>
-</ul>
+<hr>
+<h2 id="custom-behavior-tree-editor">Custom Behavior Tree Editor</h2>
+<p>Sometimes defining/modifying tree structures can be a bit messy.
+We can use the <a href="https://jaschez.github.io/blastback/ai-editor/">Online AI Editor</a> to simplify the process.</p>
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/jaschez/blastback-docs/blob/main/scripting/generated/Entity_Components.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/jaschez/blastback-docs/blob/main/scripting/generated/4. AI.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

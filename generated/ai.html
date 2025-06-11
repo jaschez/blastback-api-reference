@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Entity Components | Blastback Scripting Reference </title>
+      <title>ai | Blastback Scripting Reference </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Entity Components | Blastback Scripting Reference ">
+      <meta name="title" content="ai | Blastback Scripting Reference ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/jaschez/blastback-docs/blob/main/scripting/generated/Entity_Components.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/jaschez/blastback-docs/blob/main/scripting/generated/ai.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -85,15 +85,19 @@
         </div>
 
         <article data-uid="">
-<h1 id="entity-components">Entity Components</h1>
+<h1 id="ai">ai</h1>
 
-<p>Here is a component schema</p>
-<pre><code>{
-	&quot;commandMap&quot;: {
+<pre><code>&quot;ai&quot;: {
+	&quot;templateID&quot;: &quot;...&quot;,
+	&quot;template&quot;: {
+		...
+	},
+	&quot;resolution&quot;: {
 		...
 	}
 }
 </code></pre>
+<p>Provides an entity with intelligent behavior by using behavior tree definitions.<br></p>
 <h2 id="fields">Fields</h2>
 <table>
 <thead>
@@ -105,58 +109,50 @@
 </thead>
 <tbody>
 <tr>
-<td>commandMap</td>
-<td>Dictionary { string, string }</td>
-<td></td>
+<td>templateID</td>
+<td>string</td>
+<td>The ID of a BT template. BTs can be loaded in separate json files with the 'bt' suffix (bt.[ID].json)</td>
+</tr>
+<tr>
+<td>template</td>
+<td><a href="4.%20AI.html">BTNode</a></td>
+<td>The full structure of a BT template integrated in the component.<br></td>
+</tr>
+<tr>
+<td>resolution</td>
+<td>Dictionary { string, <a href="4.%20AI.html">BTNode</a> }</td>
+<td>Contains the resolution for those nodes that were left empty in the BT template.<br>This is used for modularity just so the same BT template file can be used for many ai-dependant entities.<br></td>
 </tr>
 </tbody>
 </table>
-<h2 id="common-components">Common components</h2>
+<hr>
+<h2 id="functions">Functions</h2>
 <ul>
-<li><a href="animatorTrigger.html">animatorTrigger</a></li>
-<li><a href="input.html">input</a></li>
-<li><a href="spawner.html">spawner</a></li>
-<li><a href="trigger.html">trigger</a></li>
+<li><h3 id="aistart">ai.start</h3>
+<blockquote>
+<p>Starts the AI model</p>
+</blockquote>
+</li>
 </ul>
-<h2 id="mob-components">Mob components</h2>
+<hr>
+<h2 id="events">Events</h2>
 <ul>
-<li><a href="InteractionHandlerMobComponent.html">InteractionHandlerMobComponent</a></li>
-<li><a href="MobComponentModel.html">MobComponentModel</a></li>
-<li><a href="LevitationMobComponent.html">LevitationMobComponent</a></li>
-<li><a href="MovementComponentModel.html">MovementComponentModel</a></li>
-<li><a href="PlayerMovementMobComponent.html">PlayerMovementMobComponent</a></li>
-<li><a href="SteeringMovementComponentModel.html">SteeringMovementComponentModel</a></li>
-<li><a href="WeaponHandlerComponentModel.html">WeaponHandlerComponentModel</a></li>
-<li><a href="ai.html">ai</a></li>
-<li><a href="ControlHandlerMobComponent.html">ControlHandlerMobComponent</a></li>
-</ul>
-<h2 id="weapon-components">Weapon components</h2>
-<ul>
-<li><a href="MeleeComponentModel.html">MeleeComponentModel</a></li>
-<li><a href="RideableShooterComponent.html">RideableShooterComponent</a></li>
-<li><a href="ShooterComponentModel.html">ShooterComponentModel</a></li>
-<li><a href="WeaponComponentModel.html">WeaponComponentModel</a></li>
-</ul>
-<h2 id="ui-components">UI components</h2>
-<ul>
-<li><a href="BarGroupUIComponent.html">BarGroupUIComponent</a></li>
-<li><a href="BarUIComponent.html">BarUIComponent</a></li>
-<li><a href="ButtonUIComponent.html">ButtonUIComponent</a></li>
-<li><a href="ComicUIComponent.html">ComicUIComponent</a></li>
-<li><a href="ImageUIComponent.html">ImageUIComponent</a></li>
-<li><a href="InputTriggerUIComponent.html">InputTriggerUIComponent</a></li>
-<li><a href="SelectionGroupUIComponent.html">SelectionGroupUIComponent</a></li>
-<li><a href="TextUIComponent.html">TextUIComponent</a></li>
-<li><a href="UIEntityComponent.html">UIEntityComponent</a></li>
-<li><a href="UpgradeGroupUIComponent.html">UpgradeGroupUIComponent</a></li>
-<li><a href="WanderUIComponent.html">WanderUIComponent</a></li>
-<li><a href="WaverUIComponent.html">WaverUIComponent</a></li>
+<li><h3 id="ainodeidonstart">ai.{nodeID}.onStart</h3>
+<blockquote>
+<p>Triggers when a certain BT node starts</p>
+</blockquote>
+</li>
+<li><h3 id="ainodeidonend">ai.{nodeID}.onEnd</h3>
+<blockquote>
+<p>Triggers when a certain BT node finishes</p>
+</blockquote>
+</li>
 </ul>
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/jaschez/blastback-docs/blob/main/scripting/generated/Entity_Components.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/jaschez/blastback-docs/blob/main/scripting/generated/ai.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

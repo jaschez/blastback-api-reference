@@ -42,30 +42,40 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "scripting/generated/4. Upgrades.md",
+      "source_relative_path": "scripting/generated/4. AI.md",
       "output": {
         ".html": {
-          "relative_path": "generated/4. Upgrades.html"
+          "relative_path": "generated/4. AI.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "scripting/generated/5. Screens.md",
+      "source_relative_path": "scripting/generated/5. Upgrades.md",
       "output": {
         ".html": {
-          "relative_path": "generated/5. Screens.html"
+          "relative_path": "generated/5. Upgrades.html"
         }
       },
       "version": ""
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "scripting/generated/6. Cinematics.md",
+      "source_relative_path": "scripting/generated/6. Screens.md",
       "output": {
         ".html": {
-          "relative_path": "generated/6. Cinematics.html"
+          "relative_path": "generated/6. Screens.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/7. Cinematics.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/7. Cinematics.html"
         }
       },
       "version": ""
@@ -386,6 +396,16 @@
       "output": {
         ".html": {
           "relative_path": "generated/WeaponModel.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/ai.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/ai.html"
         }
       },
       "version": ""
