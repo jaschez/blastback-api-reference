@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Entity Models | Blastback Scripting Reference </title>
+      <title>animator | Blastback Scripting Reference </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Entity Models | Blastback Scripting Reference ">
+      <meta name="title" content="animator | Blastback Scripting Reference ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/jaschez/blastback-docs/blob/main/scripting/generated/Entity_Models.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/jaschez/blastback-docs/blob/main/scripting/generated/animator.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -85,19 +85,15 @@
         </div>
 
         <article data-uid="">
-<h1 id="entity-models">Entity Models</h1>
+<h1 id="animator">animator</h1>
 
-<pre><code>{
-	&quot;id&quot;: &quot;...&quot;,
-	&quot;namespc&quot;: &quot;...&quot;,
-	&quot;animation&quot;: {
-		...
-	},
-	&quot;events&quot;: {
+<pre><code>&quot;animator&quot;: {
+	&quot;triggers&quot;: {
 		...
 	}
 }
 </code></pre>
+<p>Handles the entity visuals. Can only be added when the visuals contain animations.<br>    (E.g. visualPath file extension is .ase and has animation tags)<br>    An alternative is to use entity.animate {animationName},{loopMode} for commands<br></p>
 <h2 id="fields">Fields</h2>
 <table>
 <thead>
@@ -109,41 +105,31 @@
 </thead>
 <tbody>
 <tr>
-<td>id</td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td>namespc</td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td>animation</td>
-<td>Blastback.Source.Gameplay.Entities.Controllers.AnimationDefinition</td>
-<td></td>
-</tr>
-<tr>
-<td>events</td>
-<td>Dictionary { string, Dictionary { string, Blastback.Source.Gameplay.Entities.Controllers.EventDefinition }  }</td>
-<td></td>
+<td>triggers</td>
+<td>Dictionary { string, Dictionary { string, int }  }</td>
+<td>Defines which events will be triggered at a specific animation frame.<br>In the first dictionary, keys can be named after any defined animation in the visuals file.<br>The second dictionary contains a set of (convention-free) frame tags, followed by the number<br>of the animation frame where we want to trigger the event.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="model-categories">Model Categories</h2>
+<hr>
+<h2 id="events">Events</h2>
 <ul>
-<li><a href="VisualModel.html">VisualModel</a></li>
-<li><a href="WeaponModel.html">WeaponModel</a></li>
-<li><a href="ParticleSpawnModel.html">ParticleSpawnModel</a></li>
-<li><a href="DropModel.html">DropModel</a></li>
-<li><a href="PersistentWeaponModel.html">PersistentWeaponModel</a></li>
-<li><a href="ProjectileModel.html">ProjectileModel</a></li>
+<li><h3 id="animatoranimationnameframetag">animator.{animationName}.{frameTag}</h3>
+<blockquote>
+<p>Triggered when the indicated frame number is played on the indicated animation. This trigger has to be defined in the triggers parameter.</p>
+</blockquote>
+</li>
+<li><h3 id="animatoranimationnameonend">animator.{animationName}.onEnd</h3>
+<blockquote>
+<p>Triggered once a certain animation has finished</p>
+</blockquote>
+</li>
 </ul>
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/jaschez/blastback-docs/blob/main/scripting/generated/Entity_Models.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/jaschez/blastback-docs/blob/main/scripting/generated/animator.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

@@ -412,6 +412,16 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "scripting/generated/animator.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/animator.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "scripting/generated/animatorTrigger.md",
       "output": {
         ".html": {
