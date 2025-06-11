@@ -1,0 +1,217 @@
+{
+  "generated/1. Entities.html": {
+    "href": "generated/1. Entities.html",
+    "title": "Entities | Blastback Scripting Reference",
+    "summary": "Entities daaaayum broooo { \"name\": \"...\", \"visualsPath\": \"...\", \"renderLayer\": 123, \"builtin\": [...], \"components\": { ... }, \"model\": { ... } } The core definition of an entity file Fields Name Type Description name string Used as the in-game entity name, can be used for debugging purposes. visualsPath string Relative file path where the visuals are located, inside the Content/Sprites folder. File format can be either .png, .ase or .atlas renderLayer int Sets its preference to be rendered among other elements. Smaller numbers have more priority, bigger numbers have less. builtin string[] Built-in components that are being attached to the entity via assembly. Rarely used. Each value represents the relative namespace of a class, starting from Blastback.Source.Gameplay E.g. 'Interaction.TriggerListener' components Dictionary { string, Entity Component } A set of registered components that apply behaviours to the entity. model Entity Model A set of properties representing a specific kind of entity. The containing properties of the entity model are determined by the json's file name suffix. Functions entity.emit <eventID> Emits an event with a certain ID Inputs Name Type Description eventID string a thing Events entity.onStart Triggers when the entity is added to the world entity.onVisible Triggers when the entity is set as visible entity.onDestroy Triggers when the entity is destroyed Test Entity Physics Extension { \"colliderSizeX\": 123, \"colliderSizeY\": 123, \"isTrigger\": true, \"physicsLayer\": 123, \"collisionLayerMask\": [...] } Set of additional fields that defines some physical properties. Extends basic entity definition. Fields Name Type Description colliderSizeX int Sets entity collider's width. colliderSizeY int Sets entity collider's height. isTrigger bool Sets entity's collider trigger property. physicsLayer int Defines a layer that identifies entity’s physical interactions. Depending on the desired behavior there is a number defined for certain entity types: - Tilemap: 1 - Player: 2 - Enemy: 3 - Projectile: 4 - Weapon: 5 - Props: 6 - Drop: 7 - Melee Impacts: 8 - Particle: 10 collisionLayerMask int[] Defines a group of physic layers the entity can interact with, according to the defined physics layers. References Entity Components Entity Models"
+  },
+  "generated/2. Levels.html": {
+    "href": "generated/2. Levels.html",
+    "title": "Levels | Blastback Scripting Reference",
+    "summary": "Levels"
+  },
+  "generated/3. Rooms.html": {
+    "href": "generated/3. Rooms.html",
+    "title": "Levels | Blastback Scripting Reference",
+    "summary": "Levels"
+  },
+  "generated/4. Upgrades.html": {
+    "href": "generated/4. Upgrades.html",
+    "title": "Levels | Blastback Scripting Reference",
+    "summary": "Levels"
+  },
+  "generated/5. Screens.html": {
+    "href": "generated/5. Screens.html",
+    "title": "Levels | Blastback Scripting Reference",
+    "summary": "Levels"
+  },
+  "generated/6. Cinematics.html": {
+    "href": "generated/6. Cinematics.html",
+    "title": "Levels | Blastback Scripting Reference",
+    "summary": "Levels"
+  },
+  "generated/BarGroupUIComponent.html": {
+    "href": "generated/BarGroupUIComponent.html",
+    "title": "BarGroupUIComponent | Blastback Scripting Reference",
+    "summary": "BarGroupUIComponent { \"barAmountRef\": \"...\", \"currentBarIndexRef\": \"...\", \"currentBarPercRef\": \"...\", \"barID\": \"...\", \"spacing\": 123 } Fields Name Type Description barAmountRef string currentBarIndexRef string currentBarPercRef string barID string spacing int"
+  },
+  "generated/BarUIComponent.html": {
+    "href": "generated/BarUIComponent.html",
+    "title": "BarUIComponent | Blastback Scripting Reference",
+    "summary": "BarUIComponent { \"maxValueRef\": \"...\", \"valueRef\": \"...\", \"backgroundColor\": \"...\", \"width\": 123, \"height\": 123 } Fields Name Type Description maxValueRef string valueRef string backgroundColor string width int height int"
+  },
+  "generated/ButtonUIComponent.html": {
+    "href": "generated/ButtonUIComponent.html",
+    "title": "ButtonUIComponent | Blastback Scripting Reference",
+    "summary": "ButtonUIComponent { \"width\": 123, \"height\": 123 } Fields Name Type Description width int height int"
+  },
+  "generated/ComicUIComponent.html": {
+    "href": "generated/ComicUIComponent.html",
+    "title": "ComicUIComponent | Blastback Scripting Reference",
+    "summary": "ComicUIComponent { \"data\": \"...\" } Fields Name Type Description data string"
+  },
+  "generated/ControlHandlerMobComponent.html": {
+    "href": "generated/ControlHandlerMobComponent.html",
+    "title": "ControlHandlerMobComponent | Blastback Scripting Reference",
+    "summary": "ControlHandlerMobComponent { \"id\": \"...\" } Fields Name Type Description id string"
+  },
+  "generated/DropModel.html": {
+    "href": "generated/DropModel.html",
+    "title": "DropModel | Blastback Scripting Reference",
+    "summary": "DropModel { \"minStartForce\": 0.123, \"maxStartForce\": 0.123, \"minStartTorque\": 0.123, \"maxStartTorque\": 0.123, \"rotationDampen\": 0.123, \"maxAttractionDistance\": 0.123, \"collectDistance\": 0.123, \"effect\": \"...\" } Fields Name Type Description minStartForce float maxStartForce float minStartTorque float maxStartTorque float rotationDampen float maxAttractionDistance float collectDistance float effect string"
+  },
+  "generated/Entity_Components.html": {
+    "href": "generated/Entity_Components.html",
+    "title": "Entity Components | Blastback Scripting Reference",
+    "summary": "Entity Components Here is a component schema { \"commandMap\": { ... } } Fields Name Type Description commandMap Dictionary { string, string } Common components animatorTrigger input spawner trigger Mob components ControlHandlerMobComponent InteractionHandlerMobComponent MobComponentModel LevitationMobComponent MovementComponentModel PlayerMovementMobComponent SteeringMovementComponentModel WeaponHandlerComponentModel Weapon components MeleeComponentModel RideableShooterComponent ShooterComponentModel WeaponComponentModel UI components BarGroupUIComponent BarUIComponent ButtonUIComponent ComicUIComponent ImageUIComponent InputTriggerUIComponent SelectionGroupUIComponent TextUIComponent UIEntityComponent UpgradeGroupUIComponent WanderUIComponent WaverUIComponent"
+  },
+  "generated/Entity_Models.html": {
+    "href": "generated/Entity_Models.html",
+    "title": "Entity Models | Blastback Scripting Reference",
+    "summary": "Entity Models { \"id\": \"...\", \"namespc\": \"...\", \"animation\": { ... }, \"events\": { ... } } Fields Name Type Description id string namespc string animation Blastback.Source.Gameplay.Entities.Controllers.AnimationDefinition events Dictionary { string, Dictionary { string, Blastback.Source.Gameplay.Entities.Controllers.EventDefinition } } Model Categories VisualModel WeaponModel DropModel ParticleSpawnModel PersistentWeaponModel ProjectileModel"
+  },
+  "generated/ImageUIComponent.html": {
+    "href": "generated/ImageUIComponent.html",
+    "title": "ImageUIComponent | Blastback Scripting Reference",
+    "summary": "ImageUIComponent { \"visuals\": \"...\" } Fields Name Type Description visuals string"
+  },
+  "generated/InputTriggerUIComponent.html": {
+    "href": "generated/InputTriggerUIComponent.html",
+    "title": "InputTriggerUIComponent | Blastback Scripting Reference",
+    "summary": "InputTriggerUIComponent { \"amplitude\": 0.123, \"frecuency\": 0.123, \"offset\": 0.123 } Fields Name Type Description amplitude float frecuency float offset float"
+  },
+  "generated/InteractionHandlerMobComponent.html": {
+    "href": "generated/InteractionHandlerMobComponent.html",
+    "title": "InteractionHandlerMobComponent | Blastback Scripting Reference",
+    "summary": "InteractionHandlerMobComponent { \"radius\": 0.123 } Fields Name Type Description radius float"
+  },
+  "generated/LevitationMobComponent.html": {
+    "href": "generated/LevitationMobComponent.html",
+    "title": "LevitationMobComponent | Blastback Scripting Reference",
+    "summary": "LevitationMobComponent { \"ampX\": 0.123, \"ampY\": 0.123, \"offX\": 0.123, \"offY\": 0.123, \"speed\": 0.123 } Fields Name Type Description ampX float ampY float offX float offY float speed float"
+  },
+  "generated/MeleeComponentModel.html": {
+    "href": "generated/MeleeComponentModel.html",
+    "title": "MeleeComponentModel | Blastback Scripting Reference",
+    "summary": "MeleeComponentModel { \"hitBoxSize\": 0.123, \"attackDuration\": 0.123, \"canHit\": true, \"playerFriendly\": true, \"damage\": 123, \"deflection\": { ... } } Fields Name Type Description hitBoxSize float attackDuration float canHit bool playerFriendly bool damage int deflection Blastback.Source.Gameplay.Entities.Components.Weapon.DeflectionModel"
+  },
+  "generated/MobComponentModel.html": {
+    "href": "generated/MobComponentModel.html",
+    "title": "MobComponentModel | Blastback Scripting Reference",
+    "summary": "MobComponentModel { \"commandMap\": { ... } } Fields Name Type Description commandMap Dictionary { string, string }"
+  },
+  "generated/MovementComponentModel.html": {
+    "href": "generated/MovementComponentModel.html",
+    "title": "MovementComponentModel | Blastback Scripting Reference",
+    "summary": "MovementComponentModel { \"velocity\": 0.123 } Fields Name Type Description velocity float"
+  },
+  "generated/ParticleSpawnModel.html": {
+    "href": "generated/ParticleSpawnModel.html",
+    "title": "ParticleSpawnModel | Blastback Scripting Reference",
+    "summary": "ParticleSpawnModel { \"id\": \"...\", \"relX\": 123, \"relY\": 123, \"attach\": true, \"delay\": 0.123, \"renderLayer\": 123 } Fields Name Type Description id string relX int relY int attach bool delay float renderLayer int"
+  },
+  "generated/PersistentWeaponModel.html": {
+    "href": "generated/PersistentWeaponModel.html",
+    "title": "PersistentWeaponModel | Blastback Scripting Reference",
+    "summary": "PersistentWeaponModel { \"Cooldown\": 0.123 } Fields Name Type Description Cooldown float"
+  },
+  "generated/PlayerMovementMobComponent.html": {
+    "href": "generated/PlayerMovementMobComponent.html",
+    "title": "PlayerMovementMobComponent | Blastback Scripting Reference",
+    "summary": "PlayerMovementMobComponent { \"behaviors\": { ... } } Fields Name Type Description behaviors Dictionary { string, Dictionary { string, float } }"
+  },
+  "generated/ProjectileModel.html": {
+    "href": "generated/ProjectileModel.html",
+    "title": "ProjectileModel | Blastback Scripting Reference",
+    "summary": "ProjectileModel { \"verticalSize\": 0.123, \"horizontalSize\": 0.123, \"triggerStepOffset\": 0.123, \"ignoreAttackHimself\": true, \"special\": true, \"hitNumber\": 123, \"maxHitNumber\": 123, \"damage\": 123, \"maxBounces\": 123, \"rotationVelocity\": 0.123, \"velocity\": 0.123, \"velocityDecrease\": 0.123, \"killingVelocity\": 0.123, \"overridingCollisionMask\": 123, \"isEnemyBullet\": true, \"collectable\": true, \"bounceOffMobs\": true, \"effects\": { ... } } Fields Name Type Description verticalSize float horizontalSize float triggerStepOffset float ignoreAttackHimself bool special bool hitNumber int maxHitNumber int damage int maxBounces int rotationVelocity float velocity float velocityDecrease float killingVelocity float overridingCollisionMask int isEnemyBullet bool collectable bool bounceOffMobs bool effects Blastback.Source.Gameplay.Entities.Controllers.ProjectileEffect[]"
+  },
+  "generated/RideableShooterComponent.html": {
+    "href": "generated/RideableShooterComponent.html",
+    "title": "RideableShooterComponent | Blastback Scripting Reference",
+    "summary": "RideableShooterComponent { \"avoidDamage\": true } Fields Name Type Description avoidDamage bool"
+  },
+  "generated/SelectionGroupUIComponent.html": {
+    "href": "generated/SelectionGroupUIComponent.html",
+    "title": "SelectionGroupUIComponent | Blastback Scripting Reference",
+    "summary": "SelectionGroupUIComponent { \"upgradeAmt\": 123 } Fields Name Type Description upgradeAmt int"
+  },
+  "generated/ShooterComponentModel.html": {
+    "href": "generated/ShooterComponentModel.html",
+    "title": "ShooterComponentModel | Blastback Scripting Reference",
+    "summary": "ShooterComponentModel { \"projectileVelocity\": 0.123, \"projectileIDs\": [...], \"defaultProjectileID\": \"...\", \"projectilesPerShot\": 123, \"playerFriendly\": true, \"addedDamage\": 0.123, \"gunPointX\": 0.123, \"gunPointY\": 0.123 } Fields Name Type Description projectileVelocity float projectileIDs string[] defaultProjectileID string projectilesPerShot int playerFriendly bool addedDamage float gunPointX float gunPointY float"
+  },
+  "generated/SteeringMovementComponentModel.html": {
+    "href": "generated/SteeringMovementComponentModel.html",
+    "title": "SteeringMovementComponentModel | Blastback Scripting Reference",
+    "summary": "SteeringMovementComponentModel { \"behaviors\": { ... } } Fields Name Type Description behaviors Dictionary { string, Dictionary { string, float } }"
+  },
+  "generated/TextUIComponent.html": {
+    "href": "generated/TextUIComponent.html",
+    "title": "TextUIComponent | Blastback Scripting Reference",
+    "summary": "TextUIComponent { \"hAlign\": { ... }, \"vAlign\": { ... } } Fields Name Type Description hAlign Nez.HorizontalAlign vAlign Nez.VerticalAlign"
+  },
+  "generated/UIEntityComponent.html": {
+    "href": "generated/UIEntityComponent.html",
+    "title": "UIEntityComponent | Blastback Scripting Reference",
+    "summary": "UIEntityComponent { \"renderLayer\": 123, \"offsetX\": 123, \"offsetY\": 123, \"color\": \"...\", \"value\": \"...\" } Fields Name Type Description renderLayer int offsetX int offsetY int color string value string"
+  },
+  "generated/UpgradeGroupUIComponent.html": {
+    "href": "generated/UpgradeGroupUIComponent.html",
+    "title": "UpgradeGroupUIComponent | Blastback Scripting Reference",
+    "summary": "UpgradeGroupUIComponent { \"upgradeAmt\": 123 } Fields Name Type Description upgradeAmt int"
+  },
+  "generated/VisualModel.html": {
+    "href": "generated/VisualModel.html",
+    "title": "VisualModel | Blastback Scripting Reference",
+    "summary": "VisualModel { \"duration\": 0.123, \"aperture\": 0.123, \"rotation\": 0.123 } Fields Name Type Description duration float aperture float rotation float"
+  },
+  "generated/WanderUIComponent.html": {
+    "href": "generated/WanderUIComponent.html",
+    "title": "WanderUIComponent | Blastback Scripting Reference",
+    "summary": "WanderUIComponent { \"amplitude\": 0.123 } Fields Name Type Description amplitude float"
+  },
+  "generated/WaverUIComponent.html": {
+    "href": "generated/WaverUIComponent.html",
+    "title": "WaverUIComponent | Blastback Scripting Reference",
+    "summary": "WaverUIComponent { \"amplitude\": 0.123, \"frecuency\": 0.123, \"offset\": 0.123 } Fields Name Type Description amplitude float frecuency float offset float"
+  },
+  "generated/WeaponComponentModel.html": {
+    "href": "generated/WeaponComponentModel.html",
+    "title": "WeaponComponentModel | Blastback Scripting Reference",
+    "summary": "WeaponComponentModel { \"actionMap\": { ... } } Fields Name Type Description actionMap Dictionary { string, string }"
+  },
+  "generated/WeaponHandlerComponentModel.html": {
+    "href": "generated/WeaponHandlerComponentModel.html",
+    "title": "WeaponHandlerComponentModel | Blastback Scripting Reference",
+    "summary": "WeaponHandlerComponentModel { \"id\": \"...\", \"isPersistent\": true } Fields Name Type Description id string isPersistent bool"
+  },
+  "generated/WeaponModel.html": {
+    "href": "generated/WeaponModel.html",
+    "title": "WeaponModel | Blastback Scripting Reference",
+    "summary": "WeaponModel { \"cooldown\": 0.123, \"maxAmmo\": 123, \"visual\": { ... }, \"components\": { ... } } Fields Name Type Description cooldown float maxAmmo int visual Blastback.Source.Gameplay.Entities.Controllers.VisualModel components Dictionary { string, Object }"
+  },
+  "generated/animatorTrigger.html": {
+    "href": "generated/animatorTrigger.html",
+    "title": "animatorTrigger | Blastback Scripting Reference",
+    "summary": "animatorTrigger \"animatorTrigger\": { \"triggers\": { ... } } Fields Name Type Description triggers Dictionary { string, Dictionary { string, int } }"
+  },
+  "generated/input.html": {
+    "href": "generated/input.html",
+    "title": "input | Blastback Scripting Reference",
+    "summary": "input \"input\": { \"id\": \"...\" } Fields Name Type Description id string"
+  },
+  "generated/spawner.html": {
+    "href": "generated/spawner.html",
+    "title": "spawner | Blastback Scripting Reference",
+    "summary": "spawner \"spawner\": { \"id\": \"...\" } Fields Name Type Description id string"
+  },
+  "generated/trigger.html": {
+    "href": "generated/trigger.html",
+    "title": "trigger | Blastback Scripting Reference",
+    "summary": "trigger \"trigger\": { \"enabled\": true, \"whitelist\": [...] } Fields Name Type Description enabled bool whitelist string[]"
+  },
+  "index.html": {
+    "href": "index.html",
+    "title": "This is the HOMEPAGE. | Blastback Scripting Reference",
+    "summary": "This is the HOMEPAGE. Wa de jeeeeeeeeeelllll"
+  }
+}

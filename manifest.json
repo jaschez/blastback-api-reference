@@ -1,0 +1,485 @@
+{
+  "source_base_path": "C:/Users/usuario/Desktop/Proyectos/Games/Blastback/BlastbackSource/blastback-docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/1. Entities.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/1. Entities.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/2. Levels.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/2. Levels.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/3. Rooms.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/3. Rooms.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/4. Upgrades.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/4. Upgrades.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/5. Screens.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/5. Screens.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/6. Cinematics.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/6. Cinematics.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/BarGroupUIComponent.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/BarGroupUIComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/BarUIComponent.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/BarUIComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/ButtonUIComponent.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/ButtonUIComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/ComicUIComponent.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/ComicUIComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/ControlHandlerMobComponent.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/ControlHandlerMobComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/DropModel.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/DropModel.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/Entity_Components.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/Entity_Components.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/Entity_Models.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/Entity_Models.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/ImageUIComponent.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/ImageUIComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/InputTriggerUIComponent.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/InputTriggerUIComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/InteractionHandlerMobComponent.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/InteractionHandlerMobComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/LevitationMobComponent.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/LevitationMobComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/MeleeComponentModel.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/MeleeComponentModel.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/MobComponentModel.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/MobComponentModel.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/MovementComponentModel.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/MovementComponentModel.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/ParticleSpawnModel.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/ParticleSpawnModel.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/PersistentWeaponModel.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/PersistentWeaponModel.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/PlayerMovementMobComponent.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/PlayerMovementMobComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/ProjectileModel.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/ProjectileModel.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/RideableShooterComponent.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/RideableShooterComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/SelectionGroupUIComponent.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/SelectionGroupUIComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/ShooterComponentModel.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/ShooterComponentModel.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/SteeringMovementComponentModel.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/SteeringMovementComponentModel.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/TextUIComponent.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/TextUIComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/UIEntityComponent.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/UIEntityComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/UpgradeGroupUIComponent.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/UpgradeGroupUIComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/VisualModel.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/VisualModel.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/WanderUIComponent.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/WanderUIComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/WaverUIComponent.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/WaverUIComponent.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/WeaponComponentModel.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/WeaponComponentModel.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/WeaponHandlerComponentModel.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/WeaponHandlerComponentModel.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/WeaponModel.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/WeaponModel.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/animatorTrigger.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/animatorTrigger.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/input.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/input.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/spawner.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/spawner.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "scripting/generated/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "generated/toc.html"
+        },
+        ".json": {
+          "relative_path": "generated/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/generated/trigger.md",
+      "output": {
+        ".html": {
+          "relative_path": "generated/trigger.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "scripting/images/favicon.ico",
+      "output": {
+        "resource": {
+          "relative_path": "scripting/images/favicon.ico"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "scripting/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "scripting/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
