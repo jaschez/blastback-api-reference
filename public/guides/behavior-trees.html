@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Behavior Trees | Blastback Engine Docs</title>
+  <meta name="description" content="Understand how to design and implement AI behavior trees in the Blastback Engine.">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <header class="site-header">
+    <button class="mobile-menu-btn">&#9776;</button>
+    <a href="../index.html" class="header-logo">
+      <svg viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#6c63ff"/><path d="M8 22V10l8 6-8 6zM16 22V10l8 6-8 6z" fill="white" fill-opacity="0.9"/></svg>
+      Blastback Docs
+    </a>
+    <div class="header-nav">
+      <div class="header-search">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" placeholder="Search docs..." readonly>
+        <span class="search-shortcut">Ctrl+K</span>
+      </div>
+      <button class="theme-toggle">&#9790;</button>
+    </div>
+  </header>
+
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Getting Started</div><a href="./getting-started.html" class="sidebar-link">Getting Started</a><a href="./entity-scripting.html" class="sidebar-link">Entity Scripting</a><a href="./behavior-trees.html" class="sidebar-link active">Behavior Trees</a></div><div class="sidebar-section">
+      <div class="sidebar-section-title">Core Concepts</div><a href="../reference/lua-scripting.html" class="sidebar-link">Lua Scripting</a><div class="sidebar-group">
+          <button class="sidebar-group-toggle">Reference <span class="arrow">&#9656;</span></button>
+          <div class="sidebar-group-items"><a href="../reference/entities.html" class="sidebar-link">Entities</a><a href="../reference/components-overview.html" class="sidebar-link">Components</a><a href="../reference/models-overview.html" class="sidebar-link">Models</a><a href="../reference/ai-system.html" class="sidebar-link">AI / Behavior Trees</a></div></div></div><div class="sidebar-section">
+      <div class="sidebar-section-title">Components</div><div class="sidebar-group">
+          <button class="sidebar-group-toggle">Common <span class="arrow">&#9656;</span></button>
+          <div class="sidebar-group-items"><a href="../reference/components/animator.html" class="sidebar-link">animator</a><a href="../reference/components/animator-trigger.html" class="sidebar-link">animatorTrigger</a><a href="../reference/components/input.html" class="sidebar-link">Input</a><a href="../reference/components/spawner.html" class="sidebar-link">Spawner</a><a href="../reference/components/trigger.html" class="sidebar-link">Trigger</a></div></div><div class="sidebar-group">
+          <button class="sidebar-group-toggle">Mob <span class="arrow">&#9656;</span></button>
+          <div class="sidebar-group-items"><a href="../reference/components/ai.html" class="sidebar-link">ai</a><a href="../reference/components/control-handler.html" class="sidebar-link">ControlHandler</a><a href="../reference/components/interaction-handler.html" class="sidebar-link">InteractionHandler</a><a href="../reference/components/mob-component.html" class="sidebar-link">MobComponent</a><a href="../reference/components/levitation.html" class="sidebar-link">Levitation</a><a href="../reference/components/movement.html" class="sidebar-link">Movement</a><a href="../reference/components/player-movement.html" class="sidebar-link">PlayerMovement</a><a href="../reference/components/steering-movement.html" class="sidebar-link">SteeringMovement</a><a href="../reference/components/weapon-handler.html" class="sidebar-link">WeaponHandler</a></div></div><div class="sidebar-group">
+          <button class="sidebar-group-toggle">Weapon <span class="arrow">&#9656;</span></button>
+          <div class="sidebar-group-items"><a href="../reference/components/melee-component.html" class="sidebar-link">MeleeComponent</a><a href="../reference/components/rideable-shooter.html" class="sidebar-link">RideableShooter</a><a href="../reference/components/shooter-component.html" class="sidebar-link">ShooterComponent</a><a href="../reference/components/weapon-component.html" class="sidebar-link">WeaponComponent</a></div></div><div class="sidebar-group">
+          <button class="sidebar-group-toggle">UI <span class="arrow">&#9656;</span></button>
+          <div class="sidebar-group-items"><a href="../reference/components/selection-group.html" class="sidebar-link">SelectionGroup</a><a href="../reference/components/bar-group.html" class="sidebar-link">BarGroup</a><a href="../reference/components/bar.html" class="sidebar-link">Bar</a><a href="../reference/components/button.html" class="sidebar-link">Button</a><a href="../reference/components/comic.html" class="sidebar-link">Comic</a><a href="../reference/components/image.html" class="sidebar-link">Image</a><a href="../reference/components/input-trigger.html" class="sidebar-link">InputTrigger</a><a href="../reference/components/text.html" class="sidebar-link">Text</a><a href="../reference/components/ui-entity.html" class="sidebar-link">UIEntity</a><a href="../reference/components/upgrade-group.html" class="sidebar-link">UpgradeGroup</a><a href="../reference/components/wander.html" class="sidebar-link">Wander</a><a href="../reference/components/waver.html" class="sidebar-link">Waver</a></div></div></div><div class="sidebar-section">
+      <div class="sidebar-section-title">Models</div><a href="../reference/models/visual-model.html" class="sidebar-link">VisualModel</a><a href="../reference/models/weapon-model.html" class="sidebar-link">WeaponModel</a><a href="../reference/models/particle-spawn-model.html" class="sidebar-link">ParticleSpawnModel</a><a href="../reference/models/drop-model.html" class="sidebar-link">DropModel</a><a href="../reference/models/persistent-weapon-model.html" class="sidebar-link">PersistentWeaponModel</a><a href="../reference/models/projectile-model.html" class="sidebar-link">ProjectileModel</a></div><div class="sidebar-section">
+      <div class="sidebar-section-title">Guides</div><a href="./modding-guide.html" class="sidebar-link">Modding Guide</a></div>
+  </aside>
+
+  <main class="main-content">
+    <div class="content-wrapper">
+      <div class="content">
+        <div class="breadcrumb"><a href="#">Getting Started</a><span class="sep">&#9656;</span><span>Behavior Trees</span></div>
+        <h1 id="behavior-trees">Behavior Trees</h1>
+<p class="page-subtitle">Design intelligent AI behaviors using the Blastback Engine's data-driven behavior tree system. Define complex decision-making logic entirely in JSON.</p>
+
+<h2 id="what-are-behavior-trees">What Are Behavior Trees?</h2>
+<p>Behavior trees (BTs) are a hierarchical model for organizing AI decision-making. Unlike finite state machines, behavior trees offer a modular, composable structure that scales gracefully from simple patrol routines to elaborate boss fight sequences.</p>
+<p>Blastback Engine uses behavior trees as the primary AI system because they provide:</p>
+<ul>
+<li><strong>Modularity</strong> &mdash; individual sub-trees can be reused across many entity types.</li>
+<li><strong>Readability</strong> &mdash; the tree structure maps directly to how designers think about AI priorities.</li>
+<li><strong>Data-driven authoring</strong> &mdash; trees are plain JSON files, editable by hand or with the visual editor.</li>
+<li><strong>Runtime flexibility</strong> &mdash; the resolution system lets entities override specific nodes without duplicating the whole tree.</li>
+</ul>
+
+<div class="callout info"><div class="callout-title">Note</div>Every tick, the behavior tree is evaluated from the root. Each node returns one of three statuses: <strong>Success</strong>, <strong>Failure</strong>, or <strong>Running</strong>. The parent node uses these statuses to decide which child to evaluate next.</div>
+
+<h2 id="bt-file-convention">Creating Behavior Tree Files</h2>
+<p>Behavior tree files follow a strict naming convention so the engine can discover and load them automatically:</p>
+<pre><code>bt.[ID].json</code></pre>
+<p>The <code>[ID]</code> portion becomes the identifier you reference from an entity's <code>ai</code> component via <code>templateID</code>.</p>
+
+<div class="code-header"><span>Example file names</span></div>
+<pre><code>bt.basic_chase.json
+bt.patrol_and_attack.json
+bt.boss_phase1.json</code></pre>
+
+<div class="callout warning"><div class="callout-title">Important</div>The <code>bt.</code> prefix is mandatory. Without it, the engine will not recognize the file as a behavior tree definition.</div>
+
+<h2 id="node-structure">BT Node Structure</h2>
+<p>Every node in a Blastback behavior tree is a JSON object with a specific set of fields. The node's role in the tree is determined by its type, which is encoded in the key name when the node appears as a child.</p>
+
+<h3 id="node-schema">Node JSON Schema</h3>
+<div class="table-wrapper"><table>
+<thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>commands</code></td><td>string[]</td><td>No</td><td>List of command strings executed when the node is reached. Commands that perform checks return Success or Failure.</td></tr>
+<tr><td><code>children</code></td><td>object</td><td>No</td><td>Dictionary of child nodes. Keys use the format <code>type.name</code> to encode the child's node type and identifier.</td></tr>
+<tr><td><code>parameters</code></td><td>object</td><td>No</td><td>Configuration parameters for decorator nodes (e.g., repeat count, cooldown time).</td></tr>
+</tbody>
+</table></div>
+
+<div class="code-header"><span>Basic node structure</span></div>
+<pre><code>{
+  "commands": ["ai.checkPlayerInRange 120"],
+  "children": {
+    "action.chasePlayer": {
+      "commands": ["ai.moveToTarget player"]
+    },
+    "action.idle": {
+      "commands": ["entity.animate idle,loop"]
+    }
+  }
+}</code></pre>
+
+<h2 id="node-types">Node Types</h2>
+<p>The node type is identified by the key prefix in the <code>children</code> dictionary. The format is <code>type.name</code>, where <code>type</code> determines the node's evaluation behavior and <code>name</code> is a unique identifier.</p>
+
+<div class="table-wrapper"><table>
+<thead><tr><th>Type Prefix</th><th>Node Type</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>sequence</code></td><td>Sequence</td><td>Runs children left to right. Stops and returns Failure if any child fails. Returns Success only if all children succeed.</td></tr>
+<tr><td><code>selector</code></td><td>Selector</td><td>Runs children left to right. Stops and returns Success if any child succeeds. Returns Failure only if all children fail.</td></tr>
+<tr><td><code>action</code></td><td>Action</td><td>A leaf node that executes its commands. Returns the result of the last command.</td></tr>
+<tr><td><code>decorator</code></td><td>Decorator</td><td>Wraps a single child and modifies its result based on <code>parameters</code> (e.g., invert, repeat, cooldown).</td></tr>
+<tr><td><code>condition</code></td><td>Condition</td><td>Evaluates a check command. Returns Success if the condition is met, Failure otherwise. Does not execute side-effect actions.</td></tr>
+</tbody>
+</table></div>
+
+<h3 id="node-identification">Node Type Identification via Children Key</h3>
+<p>The <code>children</code> key in a node is a dictionary where each key follows the <code>type.name</code> pattern. The engine parses the prefix before the first dot to determine the node type, and uses the portion after the dot as the node's unique identifier within the tree.</p>
+
+<div class="code-header"><span>Node type identification examples</span></div>
+<pre><code>"children": {
+  "selector.mainBehavior": { ... },
+  "sequence.attackRoutine": { ... },
+  "action.flee": { ... },
+  "decorator.repeatForever": { ... },
+  "condition.isPlayerClose": { ... }
+}</code></pre>
+
+<div class="callout info"><div class="callout-title">Note</div>The name portion of the key (after the dot) is used as the <code>nodeID</code> for AI events and for the resolution system. Choose descriptive, unique names so you can easily target specific nodes for overrides and event listeners.</div>
+
+<h2 id="commands-in-nodes">Commands in Nodes</h2>
+<p>The <code>commands</code> array contains command strings that are executed when the node is evaluated. Commands serve two purposes:</p>
+<ol>
+<li><strong>Condition checks</strong> &mdash; commands that test a condition and return Success or Failure, controlling tree traversal.</li>
+<li><strong>Actions</strong> &mdash; commands that perform side effects (move, animate, attack) and return a status.</li>
+</ol>
+
+<p>When a node has multiple commands, they are executed in order. If any command returns Failure, the node immediately returns Failure without executing the remaining commands.</p>
+
+<div class="table-wrapper"><table>
+<thead><tr><th>Command</th><th>Type</th><th>Description</th><th>Returns</th></tr></thead>
+<tbody>
+<tr><td><code>ai.checkPlayerInRange &lt;distance&gt;</code></td><td>Condition</td><td>Checks if the player is within the specified pixel distance.</td><td>Success / Failure</td></tr>
+<tr><td><code>ai.moveToTarget &lt;targetType&gt;</code></td><td>Action</td><td>Moves the entity toward the specified target.</td><td>Running / Success</td></tr>
+<tr><td><code>ai.wait &lt;seconds&gt;</code></td><td>Action</td><td>Waits for the specified duration.</td><td>Running / Success</td></tr>
+<tr><td><code>ai.setTarget &lt;targetType&gt;</code></td><td>Action</td><td>Sets the current AI target for subsequent commands.</td><td>Success</td></tr>
+<tr><td><code>ai.checkHealth &lt;threshold&gt;</code></td><td>Condition</td><td>Checks if entity health is above the threshold.</td><td>Success / Failure</td></tr>
+<tr><td><code>ai.patrol &lt;distance&gt;</code></td><td>Action</td><td>Patrols back and forth within the given distance from the spawn point.</td><td>Running</td></tr>
+<tr><td><code>ai.flee &lt;distance&gt;</code></td><td>Action</td><td>Moves the entity away from the current target.</td><td>Running / Success</td></tr>
+<tr><td><code>entity.emit &lt;eventID&gt;</code></td><td>Action</td><td>Emits an event on the entity.</td><td>Success</td></tr>
+<tr><td><code>entity.animate &lt;anim&gt;,&lt;mode&gt;</code></td><td>Action</td><td>Plays an animation on the entity.</td><td>Success</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout tip"><div class="callout-title">Tip</div>You can chain a condition check before an action in the same node's <code>commands</code> array. If the condition fails, the action is never executed, and the node returns Failure immediately. This is a concise alternative to using a separate <code>condition</code> child node.</div>
+
+<h2 id="parameters-decorators">Parameters for Decorator Nodes</h2>
+<p>Decorator nodes use the <code>parameters</code> object to configure their wrapping behavior. The available parameters depend on the decorator subtype.</p>
+
+<div class="table-wrapper"><table>
+<thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>repeatCount</code></td><td>int</td><td>Number of times to repeat the child. Use <code>-1</code> for infinite repetition.</td></tr>
+<tr><td><code>cooldown</code></td><td>float</td><td>Minimum seconds between executions of the child node.</td></tr>
+<tr><td><code>invert</code></td><td>bool</td><td>If true, inverts the child's Success/Failure result.</td></tr>
+<tr><td><code>succeedAlways</code></td><td>bool</td><td>If true, always returns Success regardless of the child's result.</td></tr>
+</tbody>
+</table></div>
+
+<div class="code-header"><span>Decorator with parameters</span></div>
+<pre><code>"decorator.repeatPatrol": {
+  "parameters": {
+    "repeatCount": -1
+  },
+  "children": {
+    "action.patrolStep": {
+      "commands": ["ai.patrol 80"]
+    }
+  }
+}</code></pre>
+
+<div class="code-header"><span>Cooldown decorator example</span></div>
+<pre><code>"decorator.attackCooldown": {
+  "parameters": {
+    "cooldown": 1.5
+  },
+  "children": {
+    "action.attack": {
+      "commands": [
+        "entity.animate attack,once",
+        "entity.emit meleeAttack"
+      ]
+    }
+  }
+}</code></pre>
+
+<h2 id="inline-vs-referenced">Inline Templates vs. Referenced templateID</h2>
+<p>There are two ways to assign a behavior tree to an entity's <code>ai</code> component:</p>
+
+<h3 id="referenced-template">Referenced Template (Recommended)</h3>
+<p>Point to an external <code>bt.[ID].json</code> file using <code>templateID</code>. This is the preferred approach for reusable behaviors shared across multiple entities.</p>
+
+<div class="code-header"><span>Entity AI component with templateID</span></div>
+<pre><code>"ai": {
+  "templateID": "patrol_and_attack"
+}</code></pre>
+<p>The engine will look for a file named <code>bt.patrol_and_attack.json</code> and load its tree definition.</p>
+
+<h3 id="inline-template">Inline Template</h3>
+<p>Define the tree directly inside the entity JSON. Useful for one-off behaviors unique to a single entity.</p>
+
+<div class="code-header"><span>Entity AI component with inline tree</span></div>
+<pre><code>"ai": {
+  "tree": {
+    "children": {
+      "selector.root": {
+        "children": {
+          "sequence.chase": {
+            "children": {
+              "condition.playerNearby": {
+                "commands": ["ai.checkPlayerInRange 80"]
+              },
+              "action.pursue": {
+                "commands": ["ai.moveToTarget player"]
+              }
+            }
+          },
+          "action.idle": {
+            "commands": ["entity.animate idle,loop"]
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+
+<div class="callout info"><div class="callout-title">Note</div>Inline templates cannot be shared across entities. If you find yourself duplicating an inline tree, extract it into a <code>bt.[ID].json</code> file and use <code>templateID</code> instead.</div>
+
+<h2 id="resolution-system">The Resolution System</h2>
+<p>The resolution system is the key to creating modular, reusable AI. It allows entities to override specific nodes in a referenced behavior tree without duplicating the entire tree.</p>
+<p>When an entity references a <code>templateID</code>, it can provide a <code>resolution</code> object that maps node names to replacement definitions. The engine merges the resolution into the base tree at load time.</p>
+
+<div class="code-header"><span>Entity with resolution overrides</span></div>
+<pre><code>"ai": {
+  "templateID": "patrol_and_attack",
+  "resolution": {
+    "attackAction": {
+      "commands": [
+        "entity.animate slash,once",
+        "entity.emit meleeAttack"
+      ]
+    },
+    "patrolStep": {
+      "commands": ["ai.patrol 120"]
+    }
+  }
+}</code></pre>
+
+<p>In the base tree <code>bt.patrol_and_attack.json</code>, any node whose name portion (the part after the dot in <code>type.name</code>) matches a key in <code>resolution</code> will have its <code>commands</code> (and optionally <code>children</code>) replaced by the resolution entry.</p>
+
+<div class="callout tip"><div class="callout-title">Tip</div>Design your base behavior trees with clearly named &quot;hook&quot; nodes that you expect entities to override. For example, name your attack node <code>action.attackAction</code> so every entity can provide its own attack commands via resolution without touching the tree structure.</div>
+
+<h3 id="resolution-example">Resolution in Practice</h3>
+<p>Consider a base tree used by all melee enemies. Two different enemies override it differently:</p>
+
+<div class="code-header"><span>Goblin uses a sword slash</span></div>
+<pre><code>"ai": {
+  "templateID": "melee_enemy",
+  "resolution": {
+    "attackAction": {
+      "commands": ["entity.animate sword_slash,once"]
+    }
+  }
+}</code></pre>
+
+<div class="code-header"><span>Troll uses a ground pound</span></div>
+<pre><code>"ai": {
+  "templateID": "melee_enemy",
+  "resolution": {
+    "attackAction": {
+      "commands": [
+        "entity.animate ground_pound,once",
+        "entity.emit aoeAttack"
+      ]
+    }
+  }
+}</code></pre>
+
+<h2 id="ai-events">AI Component Events</h2>
+<p>The AI system emits events when specific nodes start and end execution. These events follow the naming convention:</p>
+<pre><code>ai.{nodeID}.onStart
+ai.{nodeID}.onEnd</code></pre>
+<p>Where <code>{nodeID}</code> is the name portion of the node key (e.g., for <code>action.chasePlayer</code>, the nodeID is <code>chasePlayer</code>).</p>
+
+<div class="table-wrapper"><table>
+<thead><tr><th>Event Pattern</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>ai.{nodeID}.onStart</code></td><td>Fires when the node begins execution for the first time in a traversal.</td></tr>
+<tr><td><code>ai.{nodeID}.onEnd</code></td><td>Fires when the node completes execution (returns Success or Failure, not Running).</td></tr>
+</tbody>
+</table></div>
+
+<p>These events can be captured by the entity's <code>commandMap</code> or model events to trigger animations, sounds, or other effects synchronized with AI state changes.</p>
+
+<div class="code-header"><span>Reacting to AI events in an entity model</span></div>
+<pre><code>"model": {
+  "events": {
+    "ai.chasePlayer.onStart": {
+      "playSound": { "id": "enemy_alert" }
+    },
+    "ai.chasePlayer.onEnd": {
+      "playSound": { "id": "enemy_lost_target" }
+    },
+    "ai.attackAction.onStart": {
+      "spawnEffect": { "id": "attack_telegraph" }
+    }
+  }
+}</code></pre>
+
+<div class="code-header"><span>Reacting to AI events via commandMap</span></div>
+<pre><code>"components": {
+  "mob": {
+    "commandMap": {
+      "ai.chasePlayer.onStart": "entity.animate run,loop",
+      "ai.patrolStep.onStart": "entity.animate walk,loop",
+      "ai.idle.onStart": "entity.animate idle,loop"
+    }
+  }
+}</code></pre>
+
+<h2 id="online-editor">Online AI Editor</h2>
+<p>Blastback provides a visual behavior tree editor that lets you design, test, and export trees without editing JSON by hand.</p>
+<p><a href="https://jaschez.github.io/blastback/ai-editor/" target="_blank">Open the Online AI Editor</a></p>
+<p>The editor supports:</p>
+<ul>
+<li>Drag-and-drop node placement and rearrangement</li>
+<li>Real-time tree validation and error highlighting</li>
+<li>Export directly to <code>bt.[ID].json</code> format</li>
+<li>Import existing trees for editing and iteration</li>
+<li>Visual debugging with simulated tick execution</li>
+<li>Node search and filtering for large trees</li>
+</ul>
+
+<div class="callout tip"><div class="callout-title">Tip</div>The online editor is the fastest way to prototype complex behavior trees. Design your tree visually, export it, and then fine-tune the JSON if needed.</div>
+
+<h2 id="complete-example">Complete Example: Patrol and Chase</h2>
+<p>Here is a complete behavior tree that implements a patrol-and-chase pattern. The entity patrols a fixed area, and when the player comes within range, it switches to chasing and attacking.</p>
+
+<div class="code-header"><span>bt.patrol_and_chase.json</span></div>
+<pre><code>{
+  "children": {
+    "selector.root": {
+      "children": {
+        "sequence.chaseAndAttack": {
+          "children": {
+            "condition.playerInRange": {
+              "commands": ["ai.checkPlayerInRange 100"]
+            },
+            "action.setPlayerTarget": {
+              "commands": ["ai.setTarget player"]
+            },
+            "selector.engageBehavior": {
+              "children": {
+                "sequence.attackIfClose": {
+                  "children": {
+                    "condition.inAttackRange": {
+                      "commands": ["ai.checkPlayerInRange 24"]
+                    },
+                    "action.attackAction": {
+                      "commands": [
+                        "entity.animate attack,once",
+                        "entity.emit meleeAttack"
+                      ]
+                    },
+                    "action.attackCooldown": {
+                      "commands": ["ai.wait 0.8"]
+                    }
+                  }
+                },
+                "action.chasePlayer": {
+                  "commands": [
+                    "entity.animate walk,loop",
+                    "ai.moveToTarget player"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "decorator.repeatPatrol": {
+          "parameters": {
+            "repeatCount": -1
+          },
+          "children": {
+            "sequence.patrolLoop": {
+              "children": {
+                "action.patrolStep": {
+                  "commands": [
+                    "entity.animate walk,loop",
+                    "ai.patrol 80"
+                  ]
+                },
+                "action.patrolPause": {
+                  "commands": [
+                    "entity.animate idle,loop",
+                    "ai.wait 2.0"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+
+<h3 id="example-breakdown">How This Tree Works</h3>
+<ol>
+<li>The root <strong>selector</strong> tries the chase-and-attack sequence first.</li>
+<li>The <code>condition.playerInRange</code> node checks if the player is within 100 pixels. If the check <strong>fails</strong>, the entire <code>sequence.chaseAndAttack</code> fails, and the selector moves to the patrol branch.</li>
+<li>If the player is in range, the entity sets the player as its target and enters the engage selector.</li>
+<li>The engage selector first tries to attack (if the player is within 24 pixels), then falls back to chasing.</li>
+<li>If no player is nearby, the patrol decorator repeats indefinitely: walk 80 pixels, pause for 2 seconds, then repeat.</li>
+</ol>
+
+<h3 id="using-with-entity">Using This Tree with an Entity</h3>
+<div class="code-header"><span>enemy_guard.mob.json (excerpt)</span></div>
+<pre><code>"ai": {
+  "templateID": "patrol_and_chase",
+  "resolution": {
+    "attackAction": {
+      "commands": [
+        "entity.animate spear_thrust,once",
+        "entity.emit meleeAttack"
+      ]
+    }
+  }
+}</code></pre>
+<p>This guard entity uses the <code>patrol_and_chase</code> tree but overrides the <code>attackAction</code> node with a custom spear thrust animation via the resolution system.</p>
+
+<div class="callout info"><div class="callout-title">Next Steps</div>Now that you understand behavior trees, see the <a href="/guides/entity-scripting">Entity Scripting</a> guide to learn how to wire AI components into full entity definitions, or explore the <a href="/guides/modding-guide">Modding Guide</a> for end-to-end examples.</div>
+      </div>
+      <div class="page-footer"><a href="./entity-scripting.html">&#8592; Entity Scripting</a><a href="./modding-guide.html">Modding Guide &#8594;</a></div>
+    </div>
+    <div class="toc-sidebar"><div class="toc-sidebar-title">On this page</div><a href="#what-are-behavior-trees" class="depth-2">What Are Behavior Trees?</a><a href="#bt-file-convention" class="depth-2">Creating Behavior Tree Files</a><a href="#node-structure" class="depth-2">BT Node Structure</a><a href="#node-schema" class="depth-3">Node JSON Schema</a><a href="#node-types" class="depth-2">Node Types</a><a href="#node-identification" class="depth-3">Node Type Identification via Children Key</a><a href="#commands-in-nodes" class="depth-2">Commands in Nodes</a><a href="#parameters-decorators" class="depth-2">Parameters for Decorator Nodes</a><a href="#inline-vs-referenced" class="depth-2">Inline Templates vs. Referenced templateID</a><a href="#referenced-template" class="depth-3">Referenced Template (Recommended)</a><a href="#inline-template" class="depth-3">Inline Template</a><a href="#resolution-system" class="depth-2">The Resolution System</a><a href="#resolution-example" class="depth-3">Resolution in Practice</a><a href="#ai-events" class="depth-2">AI Component Events</a><a href="#online-editor" class="depth-2">Online AI Editor</a><a href="#complete-example" class="depth-2">Complete Example: Patrol and Chase</a><a href="#example-breakdown" class="depth-3">How This Tree Works</a><a href="#using-with-entity" class="depth-3">Using This Tree with an Entity</a></div>
+  </main>
+
+  <div class="search-modal-overlay">
+    <div class="search-modal">
+      <input type="text" class="search-modal-input" placeholder="Search documentation...">
+      <div class="search-results"></div>
+    </div>
+  </div>
+
+  <script>window.searchIndex = [{"title":"Behavior Trees","url":"guides/behavior-trees.html","category":"Getting Started","description":"Understand how to design and implement AI behavior trees in the Blastback Engine.","keywords":"behavior tree AI nodes commands decorator sequence selector patrol chase resolution"},{"title":"Entity Scripting","url":"guides/entity-scripting.html","category":"Getting Started","description":"Learn how to create and script entities in the Blastback Engine.","keywords":"entity scripting lua components events commands"},{"title":"Getting Started with Blastback Engine","url":"guides/getting-started.html","category":"Getting Started","description":"Learn the fundamentals of Blastback Engine, including project structure, entity definitions, file conventions, physics layers, and the event system.","keywords":"getting started introduction project structure entities physics layers file conventions events commands"},{"title":"Modding Guide","url":"guides/modding-guide.html","category":"Guides","description":"A comprehensive guide for modders creating custom content for Blastback Engine games.","keywords":"modding custom entities weapons enemies UI tutorial best practices"},{"title":"Blastback Engine Documentation","url":"index.html","category":"null","description":"Official documentation for the Blastback Engine — a 2D game engine with Lua scripting for modders and developers.","keywords":"blastback engine documentation lua scripting modding 2D game engine"},{"title":"AI System — Behavior Trees","url":"reference/ai-system.html","category":"Core Concepts > Reference","description":"Reference for the Blastback Engine AI system, covering behavior tree node structure, fields, node types, and the online AI editor.","keywords":"AI behavior tree BT nodes decorator commands conditions ai editor enemy AI"},{"title":"AI","url":"reference/components/ai.html","category":"Components > Mob","description":"Provides intelligent behavior using behavior tree definitions.","keywords":"ai behavior tree bt intelligence template resolution node"},{"title":"Animator Trigger","url":"reference/components/animator-trigger.html","category":"Components > Common","description":"Component that triggers animations based on events.","keywords":"animator trigger animation events animatorTrigger"},{"title":"Animator","url":"reference/components/animator.html","category":"Components > Common","description":"Handles entity visuals. Only for animated visuals (.ase with animation tags). Alternative: entity.animate {animationName},{loopMode} command.","keywords":"animator animation visuals sprite ase animation tags triggers frames"},{"title":"Bar Group","url":"reference/components/bar-group.html","category":"Components > UI","description":"UI component for grouping multiple bar elements together.","keywords":"bar group ui hud status layout"},{"title":"Bar","url":"reference/components/bar.html","category":"Components > UI","description":"Progress or health bar UI element for displaying values visually.","keywords":"bar ui health progress meter resource"},{"title":"Button","url":"reference/components/button.html","category":"Components > UI","description":"Interactive button UI element for triggering actions.","keywords":"button ui click interactive action press"},{"title":"Comic","url":"reference/components/comic.html","category":"Components > UI","description":"Comic and dialogue panel UI component for narrative sequences.","keywords":"comic ui panel dialogue narrative cutscene story"},{"title":"Control Handler","url":"reference/components/control-handler.html","category":"Components > Mob","description":"Manages entity control states and transitions.","keywords":"control handler state transitions control handler"},{"title":"Image","url":"reference/components/image.html","category":"Components > UI","description":"Image display UI element for rendering sprites and textures.","keywords":"image ui sprite texture display icon"},{"title":"Input Trigger","url":"reference/components/input-trigger.html","category":"Components > UI","description":"UI component that triggers actions in response to player input.","keywords":"input trigger action UI keybind event"},{"title":"Input","url":"reference/components/input.html","category":"Components > Common","description":"Provides input handling for entities.","keywords":"input controls provider handling keyboard gamepad"},{"title":"Interaction Handler","url":"reference/components/interaction-handler.html","category":"Components > Mob","description":"Handles entity interactions with other entities.","keywords":"interaction handler entities interact"},{"title":"Levitation","url":"reference/components/levitation.html","category":"Components > Mob","description":"Provides floating/levitation behavior for entities.","keywords":"levitation float hover height amplitude flying"},{"title":"Melee Component","url":"reference/components/melee-component.html","category":"Components > Weapon","description":"Melee weapon behavior with attack patterns and hit detection.","keywords":"melee weapon attack hit detection combat swing"},{"title":"Mob Component","url":"reference/components/mob-component.html","category":"Components > Mob","description":"Core mob behavior component providing health, damage, and basic mob properties.","keywords":"mob health damage invincibility knockback enemy"},{"title":"Movement","url":"reference/components/movement.html","category":"Components > Mob","description":"Base movement component for entities.","keywords":"movement speed acceleration motion velocity"},{"title":"Player Movement","url":"reference/components/player-movement.html","category":"Components > Mob","description":"Player-specific movement with dash and dodge abilities.","keywords":"player movement dash dodge abilities player movement"},{"title":"Rideable Shooter","url":"reference/components/rideable-shooter.html","category":"Components > Weapon","description":"Shooter component for rideable/mountable entities.","keywords":"rideable shooter mount weapon turret"},{"title":"Selection Group","url":"reference/components/selection-group.html","category":"Components > UI","description":"UI selection group component for menu navigation and item selection.","keywords":"selection group ui menu navigation selectable"},{"title":"Shooter Component","url":"reference/components/shooter-component.html","category":"Components > Weapon","description":"Ranged weapon component for projectile-based attacks.","keywords":"shooter ranged projectile weapon gun burst"},{"title":"Spawner","url":"reference/components/spawner.html","category":"Components > Common","description":"Handles entity spawning logic.","keywords":"spawner spawn entities delay count instantiate"},{"title":"Steering Movement","url":"reference/components/steering-movement.html","category":"Components > Mob","description":"Steering-based movement for AI entities using seek/flee/wander behaviors.","keywords":"steering movement ai seek flee wander behavior"},{"title":"Text","url":"reference/components/text.html","category":"Components > UI","description":"Text display UI element for rendering styled text content.","keywords":"text label font UI display typography"},{"title":"Trigger","url":"reference/components/trigger.html","category":"Components > Common","description":"Listens and responds to trigger events.","keywords":"trigger events commands listener response"},{"title":"UI Entity","url":"reference/components/ui-entity.html","category":"Components > UI","description":"Base UI entity component that marks an entity as part of the UI layer.","keywords":"UI entity base layer interface HUD"},{"title":"Upgrade Group","url":"reference/components/upgrade-group.html","category":"Components > UI","description":"UI component for displaying and selecting from a group of upgrades.","keywords":"upgrade group selection UI powerup levelup"},{"title":"Wander","url":"reference/components/wander.html","category":"Components > UI","description":"UI element component that wanders or drifts randomly across the screen.","keywords":"wander drift random movement UI animation"},{"title":"Waver","url":"reference/components/waver.html","category":"Components > UI","description":"UI element component that applies a wave animation effect.","keywords":"waver wave animation oscillate UI effect"},{"title":"Weapon Component","url":"reference/components/weapon-component.html","category":"Components > Weapon","description":"Base weapon component defining shared weapon properties.","keywords":"weapon component damage knockback combat base"},{"title":"Weapon Handler","url":"reference/components/weapon-handler.html","category":"Components > Mob","description":"Manages weapon equipping, switching, and usage for entities.","keywords":"weapon handler equip switch combat inventory"},{"title":"Components Overview","url":"reference/components-overview.html","category":"Core Concepts > Reference","description":"Overview of the Blastback Engine component system, including the base component schema, commandMap, and a categorized listing of all available components.","keywords":"components component system commandMap animator input spawner trigger ai weapon UI mob"},{"title":"Entity Reference","url":"reference/entities.html","category":"Core Concepts > Reference","description":"Complete reference for the Blastback Engine Entity structure, including schema, fields, functions, events, and the physics extension.","keywords":"entity entities schema physics collider render layer components model events builtin"},{"title":"Lua Scripting API","url":"reference/lua-scripting.html","category":"Core Concepts","description":"Complete reference for the Blastback Engine Lua scripting API — the ctx object, engine globals, timers, buffers, commands, and lifecycle hooks.","keywords":"lua scripting moonsharp ctx context commands events timers buffers input api"},{"title":"DropModel","url":"reference/models/drop-model.html","category":"Models","description":"Defines item drop behavior when entities are destroyed.","keywords":"drop loot item destroy reward chance quantity model"},{"title":"ParticleSpawnModel","url":"reference/models/particle-spawn-model.html","category":"Models","description":"Defines particle emission properties for visual effects.","keywords":"particle spawn emission effect visual vfx model"},{"title":"PersistentWeaponModel","url":"reference/models/persistent-weapon-model.html","category":"Models","description":"Weapon model that persists across scenes and rooms, retaining state between transitions.","keywords":"weapon persistent save scene room transition state model"},{"title":"ProjectileModel","url":"reference/models/projectile-model.html","category":"Models","description":"Defines projectile behavior for ranged weapons.","keywords":"projectile bullet ranged speed damage piercing gravity model"},{"title":"VisualModel","url":"reference/models/visual-model.html","category":"Models","description":"Defines visual properties and appearance for entities.","keywords":"visual sprite appearance scale color opacity rendering model"},{"title":"WeaponModel","url":"reference/models/weapon-model.html","category":"Models","description":"Defines weapon properties including cooldown, ammunition, visuals, and components.","keywords":"weapon cooldown ammo ammunition attack combat model"},{"title":"Models Overview","url":"reference/models-overview.html","category":"Core Concepts > Reference","description":"Overview of the Blastback Engine entity model system, including the base model schema, fields, and a categorized listing of all available model types.","keywords":"models entity model animation events visual model weapon model projectile model drop model particle"}];</script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

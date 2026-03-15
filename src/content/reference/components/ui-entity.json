@@ -1,0 +1,11 @@
+{
+  "title": "UI Entity",
+  "slug": "reference/components/ui-entity",
+  "section": "Components",
+  "subsection": "UI",
+  "order": 9,
+  "navTitle": "UIEntity",
+  "description": "Base UI entity component that marks an entity as part of the UI layer.",
+  "keywords": ["UI", "entity", "base", "layer", "interface", "HUD"],
+  "content": "<h1 id=\"ui-entity\">UI Entity</h1>\n<p class=\"page-subtitle\">Base UI entity component that marks an entity as belonging to the UI rendering layer.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-ui\">UI</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>\"uiEntity\": {\n  \"layer\": 0,\n  \"anchor\": \"...\",\n  \"visible\": true\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>UIEntity</strong> component designates an entity as a UI element, placing it in the UI rendering layer separate from the game world. It controls the base properties of any UI element including its rendering layer order, screen anchor position, and visibility. All UI components require a UIEntity component as their foundation.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td>layer</td><td>int</td><td>The rendering layer order. Higher values render on top of lower values.</td></tr>\n<tr><td>anchor</td><td>string</td><td>Screen anchor position (e.g., \"topLeft\", \"center\", \"bottomRight\").</td></tr>\n<tr><td>visible</td><td>bool</td><td>Whether the UI entity is currently visible.</td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"components\": {\n    \"uiEntity\": {\n      \"layer\": 10,\n      \"anchor\": \"topLeft\",\n      \"visible\": true\n    }\n  }\n}</code></pre>"
+}

@@ -1,0 +1,11 @@
+{
+  "title": "Levitation",
+  "slug": "reference/components/levitation",
+  "section": "Components",
+  "subsection": "Mob",
+  "order": 5,
+  "navTitle": "Levitation",
+  "description": "Provides floating/levitation behavior for entities.",
+  "keywords": ["levitation", "float", "hover", "height", "amplitude", "flying"],
+  "content": "<h1 id=\"title\">Levitation</h1>\n<p class=\"page-subtitle\">Provides floating/levitation behavior for entities.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-mob\">Mob</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"levitation\": {\n    \"height\": 2.0,\n    \"speed\": 1.0,\n    \"amplitude\": 0.5\n  }\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>Levitation</strong> component provides floating and levitation behavior for entities. It allows entities to hover above the ground with configurable height, speed, and oscillation amplitude.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td><code>height</code></td><td><code>float</code></td><td>The base hover height above the ground.</td></tr>\n<tr><td><code>speed</code></td><td><code>float</code></td><td>The speed of the levitation oscillation.</td></tr>\n<tr><td><code>amplitude</code></td><td><code>float</code></td><td>The amplitude of the vertical oscillation.</td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"levitation\": {\n    \"height\": 3.0,\n    \"speed\": 1.5,\n    \"amplitude\": 0.8\n  }\n}</code></pre>"
+}

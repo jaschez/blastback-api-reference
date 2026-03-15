@@ -1,0 +1,11 @@
+{
+  "title": "Mob Component",
+  "slug": "reference/components/mob-component",
+  "section": "Components",
+  "subsection": "Mob",
+  "order": 4,
+  "navTitle": "MobComponent",
+  "description": "Core mob behavior component providing health, damage, and basic mob properties.",
+  "keywords": ["mob", "health", "damage", "invincibility", "knockback", "enemy"],
+  "content": "<h1 id=\"title\">Mob Component</h1>\n<p class=\"page-subtitle\">Core mob behavior component providing health, damage, and basic mob properties.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-mob\">Mob</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"mobComponent\": {\n    \"health\": 100,\n    \"damage\": 10,\n    \"invincibilityTime\": 0.5,\n    \"knockbackForce\": 5.0\n  }\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>Mob Component</strong> is the core mob behavior component that provides health, damage, and basic mob properties. It defines fundamental attributes shared by all mob entities in the game.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td><code>health</code></td><td><code>int</code></td><td>The mob's health points.</td></tr>\n<tr><td><code>damage</code></td><td><code>int</code></td><td>The base damage dealt by the mob.</td></tr>\n<tr><td><code>invincibilityTime</code></td><td><code>float</code></td><td>Duration in seconds the mob is invincible after taking damage.</td></tr>\n<tr><td><code>knockbackForce</code></td><td><code>float</code></td><td>Force applied when the mob is knocked back.</td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"mobComponent\": {\n    \"health\": 50,\n    \"damage\": 15,\n    \"invincibilityTime\": 0.3,\n    \"knockbackForce\": 8.0\n  }\n}</code></pre>"
+}

@@ -1,0 +1,11 @@
+{
+  "title": "Animator Trigger",
+  "slug": "reference/components/animator-trigger",
+  "section": "Components",
+  "subsection": "Common",
+  "order": 2,
+  "navTitle": "animatorTrigger",
+  "description": "Component that triggers animations based on events.",
+  "keywords": ["animator", "trigger", "animation", "events", "animatorTrigger"],
+  "content": "<h1 id=\"title\">Animator Trigger</h1>\n<p class=\"page-subtitle\">Component that triggers animations based on events.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-common\">Common</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"animatorTrigger\": {\n    \"animations\": {\n      \"eventName\": \"animationName\"\n    }\n  }\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>Animator Trigger</strong> component triggers animations based on events. It maps event names to animation names, so when a specific event is fired, the corresponding animation is played automatically.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td><code>animations</code></td><td><code>Dictionary{string, string}</code></td><td>Maps event names to animation names. When the event fires, the mapped animation is triggered.</td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"animatorTrigger\": {\n    \"animations\": {\n      \"onDamage\": \"hurt\",\n      \"onJump\": \"jump\",\n      \"onLand\": \"land\"\n    }\n  }\n}</code></pre>"
+}

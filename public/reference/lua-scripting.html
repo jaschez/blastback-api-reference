@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lua Scripting API | Blastback Engine Docs</title>
+  <meta name="description" content="Complete reference for the Blastback Engine Lua scripting API — the ctx object, engine globals, timers, buffers, commands, and lifecycle hooks.">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <header class="site-header">
+    <button class="mobile-menu-btn">&#9776;</button>
+    <a href="../index.html" class="header-logo">
+      <svg viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#6c63ff"/><path d="M8 22V10l8 6-8 6zM16 22V10l8 6-8 6z" fill="white" fill-opacity="0.9"/></svg>
+      Blastback Docs
+    </a>
+    <div class="header-nav">
+      <div class="header-search">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" placeholder="Search docs..." readonly>
+        <span class="search-shortcut">Ctrl+K</span>
+      </div>
+      <button class="theme-toggle">&#9790;</button>
+    </div>
+  </header>
+
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Getting Started</div><a href="../guides/getting-started.html" class="sidebar-link">Getting Started</a><a href="../guides/entity-scripting.html" class="sidebar-link">Entity Scripting</a><a href="../guides/behavior-trees.html" class="sidebar-link">Behavior Trees</a></div><div class="sidebar-section">
+      <div class="sidebar-section-title">Core Concepts</div><a href="./lua-scripting.html" class="sidebar-link active">Lua Scripting</a><div class="sidebar-group">
+          <button class="sidebar-group-toggle">Reference <span class="arrow">&#9656;</span></button>
+          <div class="sidebar-group-items"><a href="./entities.html" class="sidebar-link">Entities</a><a href="./components-overview.html" class="sidebar-link">Components</a><a href="./models-overview.html" class="sidebar-link">Models</a><a href="./ai-system.html" class="sidebar-link">AI / Behavior Trees</a></div></div></div><div class="sidebar-section">
+      <div class="sidebar-section-title">Components</div><div class="sidebar-group">
+          <button class="sidebar-group-toggle">Common <span class="arrow">&#9656;</span></button>
+          <div class="sidebar-group-items"><a href="./components/animator.html" class="sidebar-link">animator</a><a href="./components/animator-trigger.html" class="sidebar-link">animatorTrigger</a><a href="./components/input.html" class="sidebar-link">Input</a><a href="./components/spawner.html" class="sidebar-link">Spawner</a><a href="./components/trigger.html" class="sidebar-link">Trigger</a></div></div><div class="sidebar-group">
+          <button class="sidebar-group-toggle">Mob <span class="arrow">&#9656;</span></button>
+          <div class="sidebar-group-items"><a href="./components/ai.html" class="sidebar-link">ai</a><a href="./components/control-handler.html" class="sidebar-link">ControlHandler</a><a href="./components/interaction-handler.html" class="sidebar-link">InteractionHandler</a><a href="./components/mob-component.html" class="sidebar-link">MobComponent</a><a href="./components/levitation.html" class="sidebar-link">Levitation</a><a href="./components/movement.html" class="sidebar-link">Movement</a><a href="./components/player-movement.html" class="sidebar-link">PlayerMovement</a><a href="./components/steering-movement.html" class="sidebar-link">SteeringMovement</a><a href="./components/weapon-handler.html" class="sidebar-link">WeaponHandler</a></div></div><div class="sidebar-group">
+          <button class="sidebar-group-toggle">Weapon <span class="arrow">&#9656;</span></button>
+          <div class="sidebar-group-items"><a href="./components/melee-component.html" class="sidebar-link">MeleeComponent</a><a href="./components/rideable-shooter.html" class="sidebar-link">RideableShooter</a><a href="./components/shooter-component.html" class="sidebar-link">ShooterComponent</a><a href="./components/weapon-component.html" class="sidebar-link">WeaponComponent</a></div></div><div class="sidebar-group">
+          <button class="sidebar-group-toggle">UI <span class="arrow">&#9656;</span></button>
+          <div class="sidebar-group-items"><a href="./components/selection-group.html" class="sidebar-link">SelectionGroup</a><a href="./components/bar-group.html" class="sidebar-link">BarGroup</a><a href="./components/bar.html" class="sidebar-link">Bar</a><a href="./components/button.html" class="sidebar-link">Button</a><a href="./components/comic.html" class="sidebar-link">Comic</a><a href="./components/image.html" class="sidebar-link">Image</a><a href="./components/input-trigger.html" class="sidebar-link">InputTrigger</a><a href="./components/text.html" class="sidebar-link">Text</a><a href="./components/ui-entity.html" class="sidebar-link">UIEntity</a><a href="./components/upgrade-group.html" class="sidebar-link">UpgradeGroup</a><a href="./components/wander.html" class="sidebar-link">Wander</a><a href="./components/waver.html" class="sidebar-link">Waver</a></div></div></div><div class="sidebar-section">
+      <div class="sidebar-section-title">Models</div><a href="./models/visual-model.html" class="sidebar-link">VisualModel</a><a href="./models/weapon-model.html" class="sidebar-link">WeaponModel</a><a href="./models/particle-spawn-model.html" class="sidebar-link">ParticleSpawnModel</a><a href="./models/drop-model.html" class="sidebar-link">DropModel</a><a href="./models/persistent-weapon-model.html" class="sidebar-link">PersistentWeaponModel</a><a href="./models/projectile-model.html" class="sidebar-link">ProjectileModel</a></div><div class="sidebar-section">
+      <div class="sidebar-section-title">Guides</div><a href="../guides/modding-guide.html" class="sidebar-link">Modding Guide</a></div>
+  </aside>
+
+  <main class="main-content">
+    <div class="content-wrapper">
+      <div class="content">
+        <div class="breadcrumb"><a href="#">Core Concepts</a><span class="sep">&#9656;</span><span>Lua Scripting API</span></div>
+        <h1 id="lua-scripting-api">Lua Scripting API</h1>
+<p class="page-subtitle">Complete reference for writing Lua scripts in the Blastback Engine. Scripts interact with entities through the <code>ctx</code> context object and <code>engine</code> globals.</p>
+<span class="tag tag-function">Lua</span> <span class="tag tag-component">MoonSharp</span>
+
+<div class="callout info"><div class="callout-title">Runtime</div>Blastback uses <strong>MoonSharp</strong> (a .NET Lua interpreter) in soft sandbox mode. Each script runs in its own isolated environment &mdash; no state leaks between scripts.</div>
+
+<h2 id="overview">Overview</h2>
+<p>Lua scripts in Blastback are components that attach to entities via JSON definitions. Scripts can:</p>
+<ul>
+<li>React to input and execute entity commands</li>
+<li>Manage timed behaviors with timers and input buffers</li>
+<li>Store and expose stateful properties to other components</li>
+<li>Integrate with the entity command resolution system</li>
+</ul>
+
+<h2 id="json-schema">Defining Lua Components in JSON</h2>
+<p>Lua components are defined in entity JSON files using the <code>lua:</code> prefix. All JSON properties become available in the script via <code>ctx.config</code>.</p>
+
+<div class="code-header"><span>Entity JSON</span></div>
+<pre><code>{
+  "components": {
+    "lua:combat_momentum": {
+      "maxTier": 5,
+      "speedPerTier": 8,
+      "comboTimeout": 1.5,
+      "decayInterval": 0.4
+    }
+  }
+}</code></pre>
+
+<div class="callout tip"><div class="callout-title">Naming</div>The component name <code>lua:script_id</code> maps to a Lua script file loaded with the matching ID. Script files are located in <code>Content/Definition/Data/Game/scripts/</code>.</div>
+
+<hr>
+
+<h2 id="lifecycle">Script Lifecycle Functions</h2>
+<p>Scripts define these functions to hook into the component lifecycle:</p>
+
+<div class="api-block"><div class="api-block-header"><code class="api-block-name">init(ctx, config)</code><span class="tag tag-function">Lifecycle</span></div><div class="api-block-body"><p>Called once when the component is added to the entity. Use this to initialize state, timers, and buffers.</p>
+<div class="table-wrapper"><table><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>ctx</td><td>LuaBridgeContext</td><td>The context object for interacting with the entity.</td></tr><tr><td>config</td><td>Table</td><td>Lua table containing all JSON configuration values.</td></tr></tbody></table></div></div></div>
+
+<div class="api-block"><div class="api-block-header"><code class="api-block-name">onAddedToEntity(ctx)</code><span class="tag tag-function">Lifecycle</span></div><div class="api-block-body"><p>Called after <code>init</code>, when the component is fully added to the entity. Optional hook for setup that needs the context fully initialized.</p></div></div>
+
+<div class="api-block"><div class="api-block-header"><code class="api-block-name">update(ctx, dt)</code><span class="tag tag-function">Lifecycle</span></div><div class="api-block-body"><p>Called every frame. Only invoked if the function is defined in the script.</p>
+<div class="table-wrapper"><table><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>ctx</td><td>LuaBridgeContext</td><td>The context object.</td></tr><tr><td>dt</td><td>float</td><td>Delta time for the current frame.</td></tr></tbody></table></div></div></div>
+
+<div class="api-block"><div class="api-block-header"><code class="api-block-name">commands()</code><span class="tag tag-function">Lifecycle</span></div><div class="api-block-body"><p>Returns a table of command handler functions. Each function is registered as an entity command and should return <code>bool</code> (true = success).</p>
+<div class="code-header"><span>Lua</span></div>
+<pre><code>function commands()
+  return {
+    onHit = function()
+      tier = tier + 1
+      return true
+    end,
+    onBreak = function()
+      tier = 0
+      return true
+    end
+  }
+end</code></pre></div></div>
+
+<div class="api-block"><div class="api-block-header"><code class="api-block-name">properties()</code><span class="tag tag-function">Lifecycle</span></div><div class="api-block-body"><p>Returns a table of property getter functions. Each function returns a <code>float</code> and is registered as a PropertyReference emitter. Values are polled when <code>ctx.notify()</code> is called.</p>
+<div class="code-header"><span>Lua</span></div>
+<pre><code>function properties()
+  return {
+    getTier = function() return tier end,
+    getBonus = function() return tier * speedPerTier end
+  }
+end</code></pre></div></div>
+
+<hr>
+
+<h2 id="ctx-object">The <code>ctx</code> Object</h2>
+<p>The <code>ctx</code> parameter (LuaBridgeContext) is the primary interface between Lua scripts and the engine.</p>
+
+<h3 id="ctx-commands">Command Execution</h3>
+<p>Commands are resolved through the entity's command system. All return <code>bool</code> indicating success/failure. Commands are cached by path after first resolution for performance.</p>
+
+<div class="table-wrapper"><table>
+<thead><tr><th>Method</th><th>Parameters</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td>ctx.command(path)</td><td>string</td><td>Execute a parameterless command.</td></tr>
+<tr><td>ctx.commandS(path, param)</td><td>string, string</td><td>Command with a string parameter.</td></tr>
+<tr><td>ctx.commandF(path, param)</td><td>string, float</td><td>Command with a float parameter.</td></tr>
+<tr><td>ctx.commandFF(path, p1, p2)</td><td>string, float, float</td><td>Command with two float parameters.</td></tr>
+<tr><td>ctx.commandV(path, x, y)</td><td>string, float, float</td><td>Command with a Vector2 (passed as separate x, y).</td></tr>
+<tr><td>ctx.commandB(path, param)</td><td>string, bool</td><td>Command with a boolean parameter.</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout info"><div class="callout-title">Vector2 Note</div>Vector2 values are passed as separate <code>x</code> and <code>y</code> floats due to MoonSharp interop limitations. The engine converts them internally.</div>
+
+<h3 id="ctx-queries">Queries</h3>
+
+<div class="api-block"><div class="api-block-header"><code class="api-block-name">ctx.queryFloat(path)</code><span class="tag tag-function">Query</span></div><div class="api-block-body"><p>Query a float value from a command path. Always returns a float (converted from Lua number).</p>
+<div class="code-header"><span>Lua</span></div>
+<pre><code>local angle = ctx.queryFloat("aimAssist.getCorrectedAngle")
+local interval = ctx.queryFloat("state.refillInterval")</code></pre></div></div>
+
+<h3 id="ctx-events">Events &amp; Notifications</h3>
+
+<div class="api-block"><div class="api-block-header"><code class="api-block-name">ctx.emit(eventID)</code><span class="tag tag-event">Event</span></div><div class="api-block-body"><p>Emit an entity event. All components listening for this event ID will be notified.</p>
+<div class="code-header"><span>Lua</span></div>
+<pre><code>ctx.emit("onDamaged")
+ctx.emit("alert")</code></pre></div></div>
+
+<div class="api-block"><div class="api-block-header"><code class="api-block-name">ctx.notify()</code><span class="tag tag-event">Event</span></div><div class="api-block-body"><p>Notify the system that Lua-side property values have changed, triggering PropertyReference emitters to re-poll values.</p></div></div>
+
+<h3 id="ctx-config">Configuration</h3>
+
+<div class="api-block"><div class="api-block-header"><code class="api-block-name">ctx.config</code><span class="tag tag-component">Property</span></div><div class="api-block-body"><p>Lua table containing all JSON configuration values from the component definition. Access values as <code>ctx.config.key</code> or through the <code>config</code> parameter in <code>init()</code>.</p></div></div>
+
+<h3 id="ctx-input">Input</h3>
+<p>Access player input via <code>ctx.input</code>:</p>
+
+<div class="table-wrapper"><table>
+<thead><tr><th>Property / Method</th><th>Type</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td>ctx.input.aimX</td><td>float</td><td>X component of the aim direction.</td></tr>
+<tr><td>ctx.input.aimY</td><td>float</td><td>Y component of the aim direction.</td></tr>
+<tr><td>ctx.input.moveX</td><td>float</td><td>X component of movement direction.</td></tr>
+<tr><td>ctx.input.moveY</td><td>float</td><td>Y component of movement direction.</td></tr>
+<tr><td>ctx.input.flipState</td><td>bool</td><td>Current flip/facing state of the entity.</td></tr>
+<tr><td>ctx.input.check(key)</td><td>bool</td><td>Check if an action key is currently pressed.</td></tr>
+</tbody>
+</table></div>
+
+<hr>
+
+<h2 id="engine-globals">The <code>engine</code> Global Namespace</h2>
+<p>Global engine utilities available in all scripts.</p>
+
+<h3 id="timers">Timers</h3>
+
+<div class="api-block"><div class="api-block-header"><code class="api-block-name">engine.timer(interval, options?)</code><span class="tag tag-function">Factory</span></div><div class="api-block-body"><p>Create a timer that expires after the given interval in seconds.</p>
+<div class="table-wrapper"><table><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody>
+<tr><td>interval</td><td>float</td><td>Time in seconds until expiration.</td></tr>
+<tr><td>options</td><td>table (optional)</td><td><code>{ repeating = true }</code> to auto-reset on expiry.</td></tr>
+</tbody></table></div>
+<p><strong>Timer methods:</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Method</th><th>Returns</th><th>Description</th></tr></thead><tbody>
+<tr><td>expired()</td><td>bool</td><td>True if timer has expired. If repeating, resets automatically.</td></tr>
+<tr><td>reset()</td><td>void</td><td>Reset the timer to expire after the interval again.</td></tr>
+</tbody></table></div></div></div>
+
+<h3 id="buffers">Input Buffers</h3>
+
+<div class="api-block"><div class="api-block-header"><code class="api-block-name">engine.buffer()</code><span class="tag tag-function">Factory</span></div><div class="api-block-body"><p>Create an input buffer for storing and consuming buffered actions.</p>
+<p><strong>Buffer methods:</strong></p>
+<div class="table-wrapper"><table><thead><tr><th>Method</th><th>Returns</th><th>Description</th></tr></thead><tbody>
+<tr><td>set()</td><td>void</td><td>Mark the buffer as active.</td></tr>
+<tr><td>clear()</td><td>void</td><td>Clear the buffered state.</td></tr>
+<tr><td>isSet()</td><td>bool</td><td>Check if the buffer is currently set.</td></tr>
+<tr><td>consume(condition)</td><td>bool</td><td>If buffered AND condition() returns true, clears buffer and returns true.</td></tr>
+</tbody></table></div></div></div>
+
+<h3 id="time">Time</h3>
+
+<div class="table-wrapper"><table>
+<thead><tr><th>Function</th><th>Returns</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td>engine.deltaTime()</td><td>float</td><td>Delta time for the current frame.</td></tr>
+<tr><td>engine.totalTime()</td><td>float</td><td>Total elapsed time since engine startup.</td></tr>
+</tbody>
+</table></div>
+
+<hr>
+
+<h2 id="integration">Integration with State Machines &amp; Action Resolvers</h2>
+
+<h3 id="state-machines">State Machine Commands</h3>
+<p>Lua functions can be referenced in state machine definitions using the <code>lua:</code> prefix:</p>
+<div class="code-header"><span>JSON</span></div>
+<pre><code>{
+  "states": {
+    "idle": {
+      "onEnter": ["lua:my_script.onEnterIdle"],
+      "update": ["lua:my_script.idleUpdate"],
+      "transitions": [
+        { "check": "action", "commands": ["lua:my_script.checkTransition"] }
+      ]
+    }
+  },
+  "globalUpdate": ["lua:my_script.update"]
+}</code></pre>
+
+<h3 id="action-resolvers">Action Resolvers</h3>
+<p>In control handler definitions, Lua functions can resolve input actions:</p>
+<div class="code-header"><span>JSON</span></div>
+<pre><code>{
+  "controlHandler": {
+    "actionMap": {
+      "aim": { "resolver": "lua:action_resolvers.aim" },
+      "move": { "resolver": "lua:action_resolvers.move" },
+      "toss": { "resolver": "lua:action_resolvers.toss" }
+    }
+  }
+}</code></pre>
+
+<hr>
+
+<h2 id="examples">Complete Examples</h2>
+
+<h3 id="ex-action-resolver">Action Resolver Script</h3>
+<div class="code-header"><span>code.action_resolvers.lua</span></div>
+<pre><code>function aim(ctx)
+    ctx.commandV("weapon.aim", ctx.input.aimX, ctx.input.aimY)
+end
+
+function move(ctx)
+    ctx.commandV("movement.move", ctx.input.moveX, ctx.input.moveY)
+end
+
+function flip(ctx)
+    ctx.commandB("visual.flip", ctx.input.flipState)
+end</code></pre>
+
+<h3 id="ex-stateful-component">Stateful Component with Timers</h3>
+<div class="code-header"><span>comp.combat_momentum.lua</span></div>
+<pre><code>local tier = 0
+local maxTier = 5
+local speedPerTier = 8
+local comboWindow = nil
+local decayTimer = nil
+
+function init(_ctx, config)
+    maxTier = config.maxTier or 5
+    speedPerTier = config.speedPerTier or 8
+    comboWindow = engine.timer(config.comboTimeout or 1.5)
+    decayTimer = engine.timer(config.decayInterval or 0.4, { repeating = true })
+end
+
+function update(ctx)
+    if comboWindow.expired() and tier > 0 then
+        if decayTimer.expired() then
+            tier = tier - 1
+            ctx.notify()
+        end
+    end
+end
+
+function commands()
+    return {
+        onHit = function()
+            tier = math.min(tier + 1, maxTier)
+            comboWindow.reset()
+            return true
+        end
+    }
+end
+
+function properties()
+    return {
+        getTier = function() return tier end,
+        getSpeedBonus = function() return tier * speedPerTier end
+    }
+end</code></pre>
+
+<h3 id="ex-buffered-input">Buffered Input Pattern</h3>
+<div class="code-header"><span>Buffered attack example</span></div>
+<pre><code>local attackBuffer = nil
+
+function init()
+    attackBuffer = engine.buffer()
+end
+
+function update(ctx)
+    if ctx.input.check("attack") then
+        attackBuffer.set()
+    end
+
+    if attackBuffer.consume(function()
+        return ctx.command("weapon.canAttack")
+    end) then
+        ctx.command("weapon.fire")
+        ctx.emit("onAttack")
+    end
+end</code></pre>
+
+<h3 id="ex-timer-refill">Timer-based Refill</h3>
+<div class="code-header"><span>code.player_refill.lua</span></div>
+<pre><code>local refillTimer = nil
+
+function update(ctx)
+    if refillTimer == nil then
+        local interval = ctx.queryFloat("state.refillInterval")
+        refillTimer = engine.timer(interval, { repeating = true })
+    end
+
+    if refillTimer.expired() then
+        ctx.command("reloadAmmo")
+    end
+end</code></pre>
+      </div>
+      <div class="page-footer"><a href="./components/weapon-component.html">&#8592; WeaponComponent</a><a href="./entities.html">Entities &#8594;</a></div>
+    </div>
+    <div class="toc-sidebar"><div class="toc-sidebar-title">On this page</div><a href="#overview" class="depth-2">Overview</a><a href="#json-schema" class="depth-2">Defining Lua Components in JSON</a><a href="#lifecycle" class="depth-2">Script Lifecycle Functions</a><a href="#ctx-commands" class="depth-3">Command Execution</a><a href="#ctx-queries" class="depth-3">Queries</a><a href="#ctx-events" class="depth-3">Events &amp; Notifications</a><a href="#ctx-config" class="depth-3">Configuration</a><a href="#ctx-input" class="depth-3">Input</a><a href="#timers" class="depth-3">Timers</a><a href="#buffers" class="depth-3">Input Buffers</a><a href="#time" class="depth-3">Time</a><a href="#integration" class="depth-2">Integration with State Machines &amp; Action Resolvers</a><a href="#state-machines" class="depth-3">State Machine Commands</a><a href="#action-resolvers" class="depth-3">Action Resolvers</a><a href="#examples" class="depth-2">Complete Examples</a><a href="#ex-action-resolver" class="depth-3">Action Resolver Script</a><a href="#ex-stateful-component" class="depth-3">Stateful Component with Timers</a><a href="#ex-buffered-input" class="depth-3">Buffered Input Pattern</a><a href="#ex-timer-refill" class="depth-3">Timer-based Refill</a></div>
+  </main>
+
+  <div class="search-modal-overlay">
+    <div class="search-modal">
+      <input type="text" class="search-modal-input" placeholder="Search documentation...">
+      <div class="search-results"></div>
+    </div>
+  </div>
+
+  <script>window.searchIndex = [{"title":"Behavior Trees","url":"guides/behavior-trees.html","category":"Getting Started","description":"Understand how to design and implement AI behavior trees in the Blastback Engine.","keywords":"behavior tree AI nodes commands decorator sequence selector patrol chase resolution"},{"title":"Entity Scripting","url":"guides/entity-scripting.html","category":"Getting Started","description":"Learn how to create and script entities in the Blastback Engine.","keywords":"entity scripting lua components events commands"},{"title":"Getting Started with Blastback Engine","url":"guides/getting-started.html","category":"Getting Started","description":"Learn the fundamentals of Blastback Engine, including project structure, entity definitions, file conventions, physics layers, and the event system.","keywords":"getting started introduction project structure entities physics layers file conventions events commands"},{"title":"Modding Guide","url":"guides/modding-guide.html","category":"Guides","description":"A comprehensive guide for modders creating custom content for Blastback Engine games.","keywords":"modding custom entities weapons enemies UI tutorial best practices"},{"title":"Blastback Engine Documentation","url":"index.html","category":"null","description":"Official documentation for the Blastback Engine — a 2D game engine with Lua scripting for modders and developers.","keywords":"blastback engine documentation lua scripting modding 2D game engine"},{"title":"AI System — Behavior Trees","url":"reference/ai-system.html","category":"Core Concepts > Reference","description":"Reference for the Blastback Engine AI system, covering behavior tree node structure, fields, node types, and the online AI editor.","keywords":"AI behavior tree BT nodes decorator commands conditions ai editor enemy AI"},{"title":"AI","url":"reference/components/ai.html","category":"Components > Mob","description":"Provides intelligent behavior using behavior tree definitions.","keywords":"ai behavior tree bt intelligence template resolution node"},{"title":"Animator Trigger","url":"reference/components/animator-trigger.html","category":"Components > Common","description":"Component that triggers animations based on events.","keywords":"animator trigger animation events animatorTrigger"},{"title":"Animator","url":"reference/components/animator.html","category":"Components > Common","description":"Handles entity visuals. Only for animated visuals (.ase with animation tags). Alternative: entity.animate {animationName},{loopMode} command.","keywords":"animator animation visuals sprite ase animation tags triggers frames"},{"title":"Bar Group","url":"reference/components/bar-group.html","category":"Components > UI","description":"UI component for grouping multiple bar elements together.","keywords":"bar group ui hud status layout"},{"title":"Bar","url":"reference/components/bar.html","category":"Components > UI","description":"Progress or health bar UI element for displaying values visually.","keywords":"bar ui health progress meter resource"},{"title":"Button","url":"reference/components/button.html","category":"Components > UI","description":"Interactive button UI element for triggering actions.","keywords":"button ui click interactive action press"},{"title":"Comic","url":"reference/components/comic.html","category":"Components > UI","description":"Comic and dialogue panel UI component for narrative sequences.","keywords":"comic ui panel dialogue narrative cutscene story"},{"title":"Control Handler","url":"reference/components/control-handler.html","category":"Components > Mob","description":"Manages entity control states and transitions.","keywords":"control handler state transitions control handler"},{"title":"Image","url":"reference/components/image.html","category":"Components > UI","description":"Image display UI element for rendering sprites and textures.","keywords":"image ui sprite texture display icon"},{"title":"Input Trigger","url":"reference/components/input-trigger.html","category":"Components > UI","description":"UI component that triggers actions in response to player input.","keywords":"input trigger action UI keybind event"},{"title":"Input","url":"reference/components/input.html","category":"Components > Common","description":"Provides input handling for entities.","keywords":"input controls provider handling keyboard gamepad"},{"title":"Interaction Handler","url":"reference/components/interaction-handler.html","category":"Components > Mob","description":"Handles entity interactions with other entities.","keywords":"interaction handler entities interact"},{"title":"Levitation","url":"reference/components/levitation.html","category":"Components > Mob","description":"Provides floating/levitation behavior for entities.","keywords":"levitation float hover height amplitude flying"},{"title":"Melee Component","url":"reference/components/melee-component.html","category":"Components > Weapon","description":"Melee weapon behavior with attack patterns and hit detection.","keywords":"melee weapon attack hit detection combat swing"},{"title":"Mob Component","url":"reference/components/mob-component.html","category":"Components > Mob","description":"Core mob behavior component providing health, damage, and basic mob properties.","keywords":"mob health damage invincibility knockback enemy"},{"title":"Movement","url":"reference/components/movement.html","category":"Components > Mob","description":"Base movement component for entities.","keywords":"movement speed acceleration motion velocity"},{"title":"Player Movement","url":"reference/components/player-movement.html","category":"Components > Mob","description":"Player-specific movement with dash and dodge abilities.","keywords":"player movement dash dodge abilities player movement"},{"title":"Rideable Shooter","url":"reference/components/rideable-shooter.html","category":"Components > Weapon","description":"Shooter component for rideable/mountable entities.","keywords":"rideable shooter mount weapon turret"},{"title":"Selection Group","url":"reference/components/selection-group.html","category":"Components > UI","description":"UI selection group component for menu navigation and item selection.","keywords":"selection group ui menu navigation selectable"},{"title":"Shooter Component","url":"reference/components/shooter-component.html","category":"Components > Weapon","description":"Ranged weapon component for projectile-based attacks.","keywords":"shooter ranged projectile weapon gun burst"},{"title":"Spawner","url":"reference/components/spawner.html","category":"Components > Common","description":"Handles entity spawning logic.","keywords":"spawner spawn entities delay count instantiate"},{"title":"Steering Movement","url":"reference/components/steering-movement.html","category":"Components > Mob","description":"Steering-based movement for AI entities using seek/flee/wander behaviors.","keywords":"steering movement ai seek flee wander behavior"},{"title":"Text","url":"reference/components/text.html","category":"Components > UI","description":"Text display UI element for rendering styled text content.","keywords":"text label font UI display typography"},{"title":"Trigger","url":"reference/components/trigger.html","category":"Components > Common","description":"Listens and responds to trigger events.","keywords":"trigger events commands listener response"},{"title":"UI Entity","url":"reference/components/ui-entity.html","category":"Components > UI","description":"Base UI entity component that marks an entity as part of the UI layer.","keywords":"UI entity base layer interface HUD"},{"title":"Upgrade Group","url":"reference/components/upgrade-group.html","category":"Components > UI","description":"UI component for displaying and selecting from a group of upgrades.","keywords":"upgrade group selection UI powerup levelup"},{"title":"Wander","url":"reference/components/wander.html","category":"Components > UI","description":"UI element component that wanders or drifts randomly across the screen.","keywords":"wander drift random movement UI animation"},{"title":"Waver","url":"reference/components/waver.html","category":"Components > UI","description":"UI element component that applies a wave animation effect.","keywords":"waver wave animation oscillate UI effect"},{"title":"Weapon Component","url":"reference/components/weapon-component.html","category":"Components > Weapon","description":"Base weapon component defining shared weapon properties.","keywords":"weapon component damage knockback combat base"},{"title":"Weapon Handler","url":"reference/components/weapon-handler.html","category":"Components > Mob","description":"Manages weapon equipping, switching, and usage for entities.","keywords":"weapon handler equip switch combat inventory"},{"title":"Components Overview","url":"reference/components-overview.html","category":"Core Concepts > Reference","description":"Overview of the Blastback Engine component system, including the base component schema, commandMap, and a categorized listing of all available components.","keywords":"components component system commandMap animator input spawner trigger ai weapon UI mob"},{"title":"Entity Reference","url":"reference/entities.html","category":"Core Concepts > Reference","description":"Complete reference for the Blastback Engine Entity structure, including schema, fields, functions, events, and the physics extension.","keywords":"entity entities schema physics collider render layer components model events builtin"},{"title":"Lua Scripting API","url":"reference/lua-scripting.html","category":"Core Concepts","description":"Complete reference for the Blastback Engine Lua scripting API — the ctx object, engine globals, timers, buffers, commands, and lifecycle hooks.","keywords":"lua scripting moonsharp ctx context commands events timers buffers input api"},{"title":"DropModel","url":"reference/models/drop-model.html","category":"Models","description":"Defines item drop behavior when entities are destroyed.","keywords":"drop loot item destroy reward chance quantity model"},{"title":"ParticleSpawnModel","url":"reference/models/particle-spawn-model.html","category":"Models","description":"Defines particle emission properties for visual effects.","keywords":"particle spawn emission effect visual vfx model"},{"title":"PersistentWeaponModel","url":"reference/models/persistent-weapon-model.html","category":"Models","description":"Weapon model that persists across scenes and rooms, retaining state between transitions.","keywords":"weapon persistent save scene room transition state model"},{"title":"ProjectileModel","url":"reference/models/projectile-model.html","category":"Models","description":"Defines projectile behavior for ranged weapons.","keywords":"projectile bullet ranged speed damage piercing gravity model"},{"title":"VisualModel","url":"reference/models/visual-model.html","category":"Models","description":"Defines visual properties and appearance for entities.","keywords":"visual sprite appearance scale color opacity rendering model"},{"title":"WeaponModel","url":"reference/models/weapon-model.html","category":"Models","description":"Defines weapon properties including cooldown, ammunition, visuals, and components.","keywords":"weapon cooldown ammo ammunition attack combat model"},{"title":"Models Overview","url":"reference/models-overview.html","category":"Core Concepts > Reference","description":"Overview of the Blastback Engine entity model system, including the base model schema, fields, and a categorized listing of all available model types.","keywords":"models entity model animation events visual model weapon model projectile model drop model particle"}];</script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

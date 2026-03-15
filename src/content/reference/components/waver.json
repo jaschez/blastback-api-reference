@@ -1,0 +1,11 @@
+{
+  "title": "Waver",
+  "slug": "reference/components/waver",
+  "section": "Components",
+  "subsection": "UI",
+  "order": 12,
+  "navTitle": "Waver",
+  "description": "UI element component that applies a wave animation effect.",
+  "keywords": ["waver", "wave", "animation", "oscillate", "UI", "effect"],
+  "content": "<h1 id=\"waver\">Waver</h1>\n<p class=\"page-subtitle\">UI element component that applies a sinusoidal wave animation effect for rhythmic motion.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-ui\">UI</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>\"waver\": {\n  \"amplitude\": 0.0,\n  \"frequency\": 0.0\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>Waver</strong> component applies a smooth, sinusoidal wave animation to a UI element. It creates a rhythmic oscillating motion defined by amplitude and frequency, commonly used for hover effects, pulsing indicators, bobbing icons, and attention-drawing animations. The wave motion follows a sine curve for natural-looking movement.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td>amplitude</td><td>float</td><td>The maximum displacement of the wave in pixels.</td></tr>\n<tr><td>frequency</td><td>float</td><td>The number of complete wave cycles per second.</td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"components\": {\n    \"waver\": {\n      \"amplitude\": 8.0,\n      \"frequency\": 1.5\n    }\n  }\n}</code></pre>"
+}

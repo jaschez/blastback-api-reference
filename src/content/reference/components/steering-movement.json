@@ -1,0 +1,11 @@
+{
+  "title": "Steering Movement",
+  "slug": "reference/components/steering-movement",
+  "section": "Components",
+  "subsection": "Mob",
+  "order": 8,
+  "navTitle": "SteeringMovement",
+  "description": "Steering-based movement for AI entities using seek/flee/wander behaviors.",
+  "keywords": ["steering", "movement", "ai", "seek", "flee", "wander", "behavior"],
+  "content": "<h1 id=\"title\">Steering Movement</h1>\n<p class=\"page-subtitle\">Steering-based movement for AI entities using seek/flee/wander behaviors.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-mob\">Mob</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"steeringMovement\": {}\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>Steering Movement</strong> component provides steering-based movement for AI entities. It implements classic steering behaviors such as seek, flee, and wander, allowing AI-controlled entities to navigate the game world with natural-looking movement patterns.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td colspan=\"3\"><em>Steering behaviors are configured through the AI component's behavior tree.</em></td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"steeringMovement\": {}\n}</code></pre>"
+}

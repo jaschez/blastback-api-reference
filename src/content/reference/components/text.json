@@ -1,0 +1,11 @@
+{
+  "title": "Text",
+  "slug": "reference/components/text",
+  "section": "Components",
+  "subsection": "UI",
+  "order": 8,
+  "navTitle": "Text",
+  "description": "Text display UI element for rendering styled text content.",
+  "keywords": ["text", "label", "font", "UI", "display", "typography"],
+  "content": "<h1 id=\"text\">Text</h1>\n<p class=\"page-subtitle\">Text display UI element for rendering styled and formatted text content.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-ui\">UI</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>\"text\": {\n  \"text\": \"...\",\n  \"fontSize\": 0,\n  \"color\": \"...\",\n  \"alignment\": \"...\"\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>Text</strong> component renders text content in the UI with configurable font size, color, and alignment. It is used for labels, titles, descriptions, score displays, and any textual information shown to the player. The text supports dynamic content that can be updated at runtime through commands or data bindings.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td>text</td><td>string</td><td>The text content to display.</td></tr>\n<tr><td>fontSize</td><td>int</td><td>The font size in pixels.</td></tr>\n<tr><td>color</td><td>string</td><td>The text color (e.g., \"#FFFFFF\" or \"white\").</td></tr>\n<tr><td>alignment</td><td>string</td><td>Text alignment: \"left\", \"center\", or \"right\".</td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"components\": {\n    \"text\": {\n      \"text\": \"Score: 0\",\n      \"fontSize\": 24,\n      \"color\": \"#FFFFFF\",\n      \"alignment\": \"center\"\n    }\n  }\n}</code></pre>"
+}

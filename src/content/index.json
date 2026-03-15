@@ -1,0 +1,13 @@
+{
+  "title": "Blastback Engine Documentation",
+  "slug": "index",
+  "section": null,
+  "subsection": null,
+  "order": 0,
+  "navTitle": "Home",
+  "description": "Official documentation for the Blastback Engine — a 2D game engine with Lua scripting for modders and developers.",
+  "keywords": ["blastback", "engine", "documentation", "lua", "scripting", "modding", "2D", "game engine"],
+  "showToc": false,
+  "showFooterNav": false,
+  "content": "<div class=\"hero\"><h1><span class=\"gradient\">Blastback Engine</span></h1><p class=\"subtitle\">Comprehensive Lua scripting documentation for modders and developers. Build entities, craft AI behaviors, design weapons, and bring your 2D worlds to life.</p><div class=\"hero-buttons\"><a class=\"btn btn-primary\" href=\"guides/getting-started.html\">Get Started</a><a class=\"btn btn-secondary\" href=\"reference/entities.html\">API Reference</a></div></div><h2 id=\"explore\">Explore the Documentation</h2><div class=\"card-grid\"><a class=\"card\" href=\"guides/getting-started.html\"><div class=\"card-icon\">&#x1F680;</div><div class=\"card-title\">Getting Started</div><div class=\"card-desc\">Learn the fundamentals of the Blastback Engine, project structure, entity definitions, and core concepts.</div></a><a class=\"card\" href=\"reference/entities.html\"><div class=\"card-icon\">&#x1F3AD;</div><div class=\"card-title\">Entity System</div><div class=\"card-desc\">Understand how entities are defined, spawned, and managed. Explore JSON definitions and lifecycle events.</div></a><a class=\"card\" href=\"reference/components-overview.html\"><div class=\"card-icon\">&#x1F9E9;</div><div class=\"card-title\">Components</div><div class=\"card-desc\">Dive into the full library of built-in components &mdash; animation, health, weapons, UI, and more.</div></a><a class=\"card\" href=\"reference/models-overview.html\"><div class=\"card-icon\">&#x1F4D0;</div><div class=\"card-title\">Models</div><div class=\"card-desc\">Reference for data models: WeaponModel, ProjectileModel, DropModel, VisualModel, and others.</div></a><a class=\"card\" href=\"reference/ai-system.html\"><div class=\"card-icon\">&#x1F9E0;</div><div class=\"card-title\">AI System</div><div class=\"card-desc\">Master behavior trees to create intelligent enemies, NPCs, and autonomous entity behaviors.</div></a><a class=\"card\" href=\"guides/entity-scripting.html\"><div class=\"card-icon\">&#x1F4D6;</div><div class=\"card-title\">Scripting Guide</div><div class=\"card-desc\">Step-by-step tutorials covering entity scripting, events, commands, physics, and best practices.</div></a></div>"
+}

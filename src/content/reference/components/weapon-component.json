@@ -1,0 +1,11 @@
+{
+  "title": "Weapon Component",
+  "slug": "reference/components/weapon-component",
+  "section": "Components",
+  "subsection": "Weapon",
+  "order": 4,
+  "navTitle": "WeaponComponent",
+  "description": "Base weapon component defining shared weapon properties.",
+  "keywords": ["weapon", "component", "damage", "knockback", "combat", "base"],
+  "content": "<h1 id=\"weapon-component\">Weapon Component</h1>\n<p class=\"page-subtitle\">Base weapon component defining shared weapon properties such as damage, knockback, and type.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-weapon\">Weapon</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>\"weaponComponent\": {\n  \"damage\": 0,\n  \"knockback\": 0.0,\n  \"type\": \"...\"\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>WeaponComponent</strong> is the base weapon component that defines shared weapon properties. It provides the foundation for all weapon types, including common attributes such as damage output, knockback force, and weapon classification. Specialized weapon components like ShooterComponent and MeleeComponent extend this base to add type-specific behavior.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td>damage</td><td>int</td><td>Base damage dealt by the weapon per hit.</td></tr>\n<tr><td>knockback</td><td>float</td><td>Force applied to the target on hit, pushing them away.</td></tr>\n<tr><td>type</td><td>string</td><td>The weapon classification type (e.g., \"melee\", \"ranged\", \"explosive\").</td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"components\": {\n    \"weaponComponent\": {\n      \"damage\": 25,\n      \"knockback\": 3.5,\n      \"type\": \"ranged\"\n    }\n  }\n}</code></pre>"
+}
