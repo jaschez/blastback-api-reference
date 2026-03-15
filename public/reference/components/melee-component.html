@@ -49,35 +49,59 @@
       <div class="content">
         <div class="breadcrumb"><a href="#">Components</a><span class="sep">&#9656;</span><a href="#">Weapon</a><span class="sep">&#9656;</span><span>Melee Component</span></div>
         <h1 id="title">Melee Component</h1>
-<p class="page-subtitle">Melee weapon behavior with attack patterns and hit detection.</p>
+<p class="page-subtitle">Melee weapon behavior with attack patterns, hit detection, and projectile deflection.</p>
 <span class="tag tag-component">Component</span> <span class="tag tag-weapon">Weapon</span>
 
 <h2 id="schema">Schema</h2>
 <div class="code-header"><span>JSON</span></div>
-<pre><code>{
-  "meleeComponent": {}
+<pre><code>"meleeComponent": {
+  "hitBoxSize": 12.0,
+  "attackDuration": 0.3,
+  "canHit": true,
+  "playerFriendly": true,
+  "damage": 10,
+  "deflection": { ... }
 }</code></pre>
 
 <h2 id="description">Description</h2>
-<p>The <strong>Melee Component</strong> provides melee weapon behavior including attack patterns and hit detection. It handles close-range combat mechanics such as swing arcs, damage timing, and collision detection with targets.</p>
+<p>The <strong>MeleeComponent</strong> defines melee weapon behavior including hitbox sizing, attack timing, damage, and projectile deflection. It handles close-range combat mechanics such as hit detection, damage application, and optional deflection of incoming projectiles during the attack window.</p>
 
 <h2 id="fields">Fields</h2>
 <div class="table-wrapper"><table>
-<thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+<thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>
 <tbody>
-<tr><td colspan="3"><em>Melee behavior is configured through the weapon component and animator triggers.</em></td></tr>
+<tr><td>hitBoxSize</td><td>float</td><td>Size of the melee attack hitbox in pixels.</td></tr>
+<tr><td>attackDuration</td><td>float</td><td>Duration of the attack swing in seconds.</td></tr>
+<tr><td>canHit</td><td>bool</td><td>Whether this melee weapon can deal damage to targets.</td></tr>
+<tr><td>playerFriendly</td><td>bool</td><td>If true, the melee attack will not damage the player.</td></tr>
+<tr><td>damage</td><td>int</td><td>Base damage dealt per hit.</td></tr>
+<tr><td>deflection</td><td>DeflectionModel</td><td>Configuration for projectile deflection during melee attacks. When set, the weapon can deflect incoming projectiles.</td></tr>
 </tbody>
 </table></div>
 
 <h2 id="example">Example</h2>
-<div class="code-header"><span>JSON</span></div>
+<div class="code-header"><span>JSON &mdash; Sword with deflection</span></div>
 <pre><code>{
-  "meleeComponent": {}
+  "components": {
+    "meleeComponent": {
+      "hitBoxSize": 16.0,
+      "attackDuration": 0.25,
+      "canHit": true,
+      "playerFriendly": true,
+      "damage": 15,
+      "deflection": {
+        "enabled": true
+      }
+    }
+  }
 }</code></pre>
+
+<h2 id="related">Related</h2>
+<ul><li><a href="weapon-component.html">WeaponComponent</a> &mdash; Base weapon configuration</li><li><a href="shooter-component.html">ShooterComponent</a> &mdash; Ranged weapon alternative</li></ul>
       </div>
       <div class="page-footer"><a href="./ui-entity.html">&#8592; UIEntity</a><a href="./rideable-shooter.html">RideableShooter &#8594;</a></div>
     </div>
-    <div class="toc-sidebar"><div class="toc-sidebar-title">On this page</div><a href="#schema" class="depth-2">Schema</a><a href="#description" class="depth-2">Description</a><a href="#fields" class="depth-2">Fields</a><a href="#example" class="depth-2">Example</a></div>
+    <div class="toc-sidebar"><div class="toc-sidebar-title">On this page</div><a href="#schema" class="depth-2">Schema</a><a href="#description" class="depth-2">Description</a><a href="#fields" class="depth-2">Fields</a><a href="#example" class="depth-2">Example</a><a href="#related" class="depth-2">Related</a></div>
   </main>
 
   <div class="search-modal-overlay">
