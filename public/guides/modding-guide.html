@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Modding Guide | Blastback Engine Docs</title>
-  <meta name="description" content="A comprehensive guide for creating mods in Blastback Engine, covering custom entities, weapons, UI elements, and best practices.">
+  <meta name="description" content="A comprehensive guide for modders creating custom content for Blastback Engine games.">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
 </head>
@@ -48,62 +48,109 @@
     <div class="content-wrapper">
       <div class="content">
         <div class="breadcrumb"><a href="#">Guides</a><span class="sep">&#9656;</span><span>Modding Guide</span></div>
-        <h1 id="modding-guide">Modding Guide</h1><p class="page-subtitle">A practical guide to creating custom content for Blastback Engine. Learn how to build entities, weapons, UI elements, and more.</p><div class="callout info"><div class="callout-title">Prerequisites</div>Before diving in, make sure you have read the <a href="getting-started.html">Getting Started</a> guide and understand the basics of the <a href="entity-scripting.html">Entity Scripting</a> system.</div><h2 id="creating-custom-entities">Creating Custom Entities</h2><p>Modding in Blastback Engine revolves around creating JSON entity files and composing them from existing components. To create a custom entity:</p><ol><li><strong>Create a new JSON file</strong> in the <code>Content/Entities/</code> directory with a descriptive name (e.g., <code>fire_bat.mob.json</code>).</li><li><strong>Define the base properties</strong> including name, visuals path, render layer, and physics configuration.</li><li><strong>Add components</strong> to give the entity its behavior -- movement, animation, AI, health, and weapons.</li><li><strong>Create a behavior tree</strong> if the entity needs AI (place it in <code>Content/BehaviorTrees/</code> as <code>bt.[ID].json</code>).</li><li><strong>Add sprite assets</strong> to <code>Content/Sprites/</code> in PNG, ASE, or Atlas format.</li></ol><h3 id="naming-convention">File Naming Convention</h3><div class="table-wrapper"><table><thead><tr><th>Pattern</th><th>Model Type</th><th>Example</th></tr></thead><tbody><tr><td><code>[name].mob.json</code></td><td>Mob (enemies, NPCs)</td><td><code>goblin.mob.json</code></td></tr><tr><td><code>[name].weapon.json</code></td><td>Weapon</td><td><code>laser_rifle.weapon.json</code></td></tr><tr><td><code>[name].projectile.json</code></td><td>Projectile</td><td><code>fireball.projectile.json</code></td></tr><tr><td><code>[name].drop.json</code></td><td>Item drop</td><td><code>health_potion.drop.json</code></td></tr></tbody></table></div><div class="code-header"><span>fire_bat.mob.json</span></div><pre><code>{
-  "name": "Fire Bat",
-  "visualsPath": "enemies/fire_bat",
-  "renderLayer": 5,
-  "colliderSizeX": 10,
-  "colliderSizeY": 10,
-  "physicsLayer": 3,
-  "collisionLayerMask": [1, 2, 4],
+        <h1 id="modding-guide">Modding Guide</h1>
+<p class="page-subtitle">Everything you need to know to create custom content for Blastback Engine games &mdash; from simple entities to complex AI-driven enemies and custom weapons.</p>
+
+<div class="callout info"><div class="callout-title">Prerequisites</div>Before diving in, make sure you have read the <a href="/guides/getting-started">Getting Started</a> guide and understand the basics of the <a href="/guides/entity-scripting">Entity Scripting</a> system and <a href="/guides/behavior-trees">Behavior Trees</a>.</div>
+
+<h2 id="introduction">Introduction for Modders</h2>
+<p>Blastback Engine's data-driven architecture makes it straightforward to add new content without modifying the engine itself. All game content &mdash; entities, weapons, enemies, projectiles, and UI &mdash; is defined through JSON files and sprite assets placed in the correct directories. The engine discovers and loads your content automatically based on file naming conventions.</p>
+<p>This guide walks you through the full workflow of creating custom content, from setting up your project structure to debugging common issues.</p>
+
+<h2 id="project-structure">Project File Structure</h2>
+<p>Blastback mods follow a specific directory structure within the <code>Content</code> folder. Keeping your files organized correctly is essential for the engine to discover them.</p>
+
+<div class="code-header"><span>Directory Structure</span></div>
+<pre><code>Content/
+  Sprites/
+    enemies/           # Enemy sprite files (.ase, .png, .atlas)
+    weapons/           # Weapon sprites
+    projectiles/       # Projectile sprites
+    props/             # Prop and decoration sprites
+    ui/                # UI element sprites
+  Entities/
+    enemies/
+      *.mob.json       # Mob entity definitions
+    weapons/
+      *.weapon.json    # Weapon entity definitions
+    drops/
+      *.drop.json      # Drop/pickup definitions
+    projectiles/
+      *.projectile.json  # Projectile definitions
+    props/
+      *.json           # Prop and decoration entities
+  BehaviorTrees/
+    bt.*.json          # Behavior tree templates</code></pre>
+
+<div class="callout tip"><div class="callout-title">Tip</div>Subdirectories inside <code>Entities/</code> are optional but recommended for organization. The engine scans all subdirectories recursively, so you can nest folders as deeply as you need.</div>
+
+<h3 id="naming-conventions">File Naming Conventions</h3>
+<div class="table-wrapper"><table>
+<thead><tr><th>Pattern</th><th>Model Type</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><code>[name].mob.json</code></td><td>Mob (enemies, NPCs)</td><td><code>goblin.mob.json</code></td></tr>
+<tr><td><code>[name].weapon.json</code></td><td>Weapon</td><td><code>laser_rifle.weapon.json</code></td></tr>
+<tr><td><code>[name].projectile.json</code></td><td>Projectile</td><td><code>fireball.projectile.json</code></td></tr>
+<tr><td><code>[name].drop.json</code></td><td>Item drop</td><td><code>health_potion.drop.json</code></td></tr>
+<tr><td><code>bt.[id].json</code></td><td>Behavior tree</td><td><code>bt.patrol_and_chase.json</code></td></tr>
+</tbody>
+</table></div>
+
+<h2 id="creating-entities">Creating Custom Entities</h2>
+<p>Every entity starts as a JSON file. The filename determines the entity ID, and the suffix before <code>.json</code> determines the model type. At minimum, an entity needs a <code>name</code> and <code>visualsPath</code>.</p>
+
+<h3 id="minimal-entity">Minimal Entity Example</h3>
+<div class="code-header"><span>decoration_lamp.json</span></div>
+<pre><code>{
+  "name": "Lamp",
+  "visualsPath": "props/lamp",
+  "renderLayer": 8,
+  "colliderSizeX": 8,
+  "colliderSizeY": 16,
+  "physicsLayer": 6,
+  "collisionLayerMask": [1]
+}</code></pre>
+
+<h3 id="interactive-entity">Interactive Entity with Events</h3>
+<p>Add a <code>commandMap</code> to make an entity react to events:</p>
+<div class="code-header"><span>chest.json</span></div>
+<pre><code>{
+  "name": "Treasure Chest",
+  "visualsPath": "props/chest",
+  "renderLayer": 7,
+  "colliderSizeX": 16,
+  "colliderSizeY": 12,
+  "isTrigger": true,
+  "physicsLayer": 6,
+  "collisionLayerMask": [2],
   "components": {
-    "animator": {
-      "triggers": {
-        "idle": {},
-        "fly": {},
-        "attack": { "hit": 3 }
+    "trigger": {
+      "commandMap": {
+        "onPlayerEnter": "entity.emit openChest"
+      },
+      "events": {
+        "onCollision": ["onPlayerEnter"]
       }
-    },
-    "ai": {
-      "templateID": "flying_chase"
-    },
-    "mob": {
-      "health": 20,
-      "damage": 8
-    },
-    "movement": {
-      "speed": 85.0
-    },
-    "levitation": {
-      "amplitude": 3.0,
-      "frequency": 2.0
     }
   },
   "model": {
-    "id": "fire_bat",
-    "namespc": "enemies"
-  }
-}</code></pre><div class="callout tip"><div class="callout-title">Tip</div>Start by duplicating an existing entity file that is similar to what you want to create, then modify the properties and components. This is faster than building from scratch and helps avoid missing required fields.</div><h2 id="component-system">Working with the Component System</h2><p>Components are added to the <code>components</code> object in your entity JSON. Each key is the component type identifier, and the value is its configuration.</p><h3>Commonly Used Components</h3><div class="table-wrapper"><table><thead><tr><th>Component</th><th>Purpose</th><th>Typical Use</th></tr></thead><tbody><tr><td><code>animator</code></td><td>Sprite animation control</td><td>All visual entities</td></tr><tr><td><code>movement</code></td><td>Physics-based movement</td><td>Characters, enemies, NPCs</td></tr><tr><td><code>steeringMovement</code></td><td>Avoidance and flocking</td><td>Groups of enemies</td></tr><tr><td><code>mob</code></td><td>Health, damage, knockback</td><td>Enemies and destructible props</td></tr><tr><td><code>ai</code></td><td>Behavior tree connection</td><td>Autonomous entities</td></tr><tr><td><code>weaponHandler</code></td><td>Weapon equip and use</td><td>Armed enemies and players</td></tr><tr><td><code>trigger</code></td><td>Event zone detection</td><td>Interactive areas, traps</td></tr><tr><td><code>spawner</code></td><td>Entity spawning</td><td>Spawn points, generators</td></tr><tr><td><code>levitation</code></td><td>Floating hover effect</td><td>Flying enemies, floating items</td></tr><tr><td><code>input</code></td><td>Player input handling</td><td>Player entity only</td></tr></tbody></table></div><h3>Combining Components with commandMap</h3><p>The power of the component system comes from composition. The <code>commandMap</code> system ensures components communicate through events rather than direct references, so any combination is valid.</p><div class="code-header"><span>Component combination example</span></div><pre><code>"components": {
-  "animator": { ... },
-  "movement": { "speed": 50.0 },
-  "mob": { "health": 100, "damage": 0 },
-  "trigger": {
-    "commandMap": {
-      "onPlayerEnter": "entity.animate open,once",
-      "onPlayerExit": "entity.animate close,once"
-    },
     "events": {
-      "onCollision": ["onPlayerEnter"],
-      "onCollisionExit": ["onPlayerExit"]
-    }
-  },
-  "interactionHandler": {
-    "interactionKey": "E",
-    "commandMap": {
-      "onInteract": "entity.emit activate"
+      "openChest": {
+        "spawnDrop": { "lootTable": "common" },
+        "playSound": { "id": "chest_open" }
+      }
     }
   }
-}</code></pre><h2 id="custom-weapons">Creating Custom Weapons</h2><p>Weapons in Blastback Engine are defined through a combination of models and components. The three key pieces are <strong>WeaponModel</strong>, <strong>ShooterComponent</strong>, and <strong>MeleeComponent</strong>.</p><h3 id="weapon-model">WeaponModel</h3><p>The <code>WeaponModel</code> defines the weapon's core data -- its name, damage, fire rate, visual representation, and projectile configuration.</p><div class="code-header"><span>plasma_cannon.weapon.json</span></div><pre><code>{
+}</code></pre>
+
+<h2 id="custom-weapons">Creating Custom Weapons</h2>
+<p>Weapons are entities with a <code>WeaponModel</code> and weapon-specific components. The two primary weapon types are ranged (using <code>shooterComponent</code>) and melee (using <code>meleeComponent</code>).</p>
+
+<div class="card-grid"><div class="card"><div class="card-title">WeaponModel</div><div class="card-desc">The base data model for all weapons. Defines cooldown, ammo capacity, and visual representation.</div></div><div class="card"><div class="card-title">ShooterComponent</div><div class="card-desc">Handles projectile spawning, fire rate, spread, burst fire, and muzzle offsets for ranged weapons.</div></div><div class="card"><div class="card-title">MeleeComponent</div><div class="card-desc">Handles melee swing arcs, hit detection zones, combo chains, and impact timing for close-range weapons.</div></div><div class="card"><div class="card-title">weaponComponent</div><div class="card-desc">Base component shared by all weapons. Defines damage, knockback force, and weapon type classification.</div></div></div>
+
+<h3 id="ranged-weapon">Ranged Weapon Example</h3>
+<div class="code-header"><span>plasma_cannon.weapon.json</span></div>
+<pre><code>{
   "name": "Plasma Cannon",
   "visualsPath": "weapons/plasma_cannon",
   "renderLayer": 4,
@@ -134,7 +181,24 @@
       "scale": 1.0
     }
   }
-}</code></pre><h3 id="shooter-component">ShooterComponent</h3><p>For ranged weapons, the <code>ShooterComponent</code> handles projectile spawning, aiming, recoil, and ammunition.</p><div class="table-wrapper"><table><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>projectileEntity</code></td><td>string</td><td>Entity ID of the projectile to spawn</td></tr><tr><td><code>fireRate</code></td><td>float</td><td>Seconds between shots</td></tr><tr><td><code>spread</code></td><td>float</td><td>Angular spread in degrees for shot randomization</td></tr><tr><td><code>burstCount</code></td><td>int</td><td>Number of projectiles per burst (1 for single shot)</td></tr><tr><td><code>burstDelay</code></td><td>float</td><td>Delay between burst projectiles</td></tr><tr><td><code>muzzleOffset</code></td><td>float</td><td>Spawn offset for projectiles relative to weapon origin</td></tr></tbody></table></div><h3 id="melee-component">MeleeComponent</h3><p>For melee weapons, the <code>MeleeComponent</code> handles swing arcs, hit detection, and damage application. Melee attacks use the Melee Impacts physics layer (8) for hit detection.</p><div class="code-header"><span>battle_axe.weapon.json</span></div><pre><code>{
+}</code></pre>
+
+<h3 id="shooter-fields">ShooterComponent Fields</h3>
+<div class="table-wrapper"><table>
+<thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>projectileEntity</code></td><td>string</td><td>The entity ID of the projectile to spawn.</td></tr>
+<tr><td><code>fireRate</code></td><td>float</td><td>Minimum seconds between shots.</td></tr>
+<tr><td><code>spread</code></td><td>float</td><td>Random angle spread in degrees for each shot.</td></tr>
+<tr><td><code>burstCount</code></td><td>int</td><td>Number of projectiles fired per trigger pull.</td></tr>
+<tr><td><code>burstDelay</code></td><td>float</td><td>Delay in seconds between burst projectiles.</td></tr>
+<tr><td><code>muzzleOffset</code></td><td>float</td><td>Distance in pixels from the entity center to spawn projectiles.</td></tr>
+</tbody>
+</table></div>
+
+<h3 id="melee-weapon">Melee Weapon Example</h3>
+<div class="code-header"><span>battle_axe.weapon.json</span></div>
+<pre><code>{
   "name": "Battle Axe",
   "visualsPath": "weapons/battle_axe",
   "renderLayer": 4,
@@ -144,7 +208,11 @@
       "knockback": 150,
       "type": "melee"
     },
-    "meleeComponent": {},
+    "meleeComponent": {
+      "swingArc": 120,
+      "hitRadius": 20,
+      "comboCount": 2
+    },
     "animator": {
       "triggers": {
         "swing": { "impact": 4 }
@@ -159,7 +227,24 @@
       "scale": 1.2
     }
   }
-}</code></pre><div class="table-wrapper"><table><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>damage</code></td><td>int</td><td>Base damage per hit</td></tr><tr><td><code>knockback</code></td><td>float</td><td>Knockback force applied on hit</td></tr><tr><td><code>range</code></td><td>float</td><td>Reach distance of the melee attack</td></tr><tr><td><code>arc</code></td><td>float</td><td>Swing arc in degrees</td></tr><tr><td><code>attackDuration</code></td><td>float</td><td>Duration of the attack animation window</td></tr><tr><td><code>cooldown</code></td><td>float</td><td>Time before the weapon can attack again</td></tr></tbody></table></div><h2 id="custom-projectiles">Creating Projectiles</h2><p>Projectiles are lightweight entities that travel in a direction and apply effects on collision.</p><div class="code-header"><span>plasma_bolt.projectile.json</span></div><pre><code>{
+}</code></pre>
+
+<h3 id="melee-fields">MeleeComponent Fields</h3>
+<div class="table-wrapper"><table>
+<thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>swingArc</code></td><td>float</td><td>The angular width of the melee swing in degrees.</td></tr>
+<tr><td><code>hitRadius</code></td><td>float</td><td>The reach of the melee attack in pixels.</td></tr>
+<tr><td><code>comboCount</code></td><td>int</td><td>Number of swings in a combo chain before cooldown.</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout info"><div class="callout-title">Note</div>Melee weapons should set <code>maxAmmo</code> to <code>-1</code> in the model to indicate unlimited use. Melee attacks use physics layer 8 (Melee Impacts) for hit detection.</div>
+
+<h3 id="projectile-entity">Creating the Projectile Entity</h3>
+<p>Ranged weapons require a corresponding projectile entity referenced by the <code>projectileEntity</code> field:</p>
+<div class="code-header"><span>plasma_bolt.projectile.json</span></div>
+<pre><code>{
   "name": "Plasma Bolt",
   "visualsPath": "projectiles/plasma_bolt",
   "renderLayer": 3,
@@ -175,31 +260,164 @@
     "piercing": false,
     "gravity": 0.0
   }
-}</code></pre><h2 id="ui-elements">Creating UI Elements</h2><p>The engine provides 12 UI components for building in-game interfaces. UI elements are entities with specialized components that render on the screen layer rather than the world layer.</p><h3>Available UI Components</h3><div class="table-wrapper"><table><thead><tr><th>Component</th><th>Purpose</th></tr></thead><tbody><tr><td><code>uiPanel</code></td><td>Background panel with configurable size, color, and opacity</td></tr><tr><td><code>uiLabel</code></td><td>Text display with font, size, color, and alignment options</td></tr><tr><td><code>uiImage</code></td><td>Static or animated image display</td></tr><tr><td><code>uiButton</code></td><td>Interactive button with hover, press, and click events</td></tr><tr><td><code>uiProgressBar</code></td><td>Horizontal or vertical fill bar for health, loading, etc.</td></tr><tr><td><code>uiSlider</code></td><td>Draggable slider for numeric value input</td></tr><tr><td><code>uiToggle</code></td><td>On/off toggle switch</td></tr><tr><td><code>uiList</code></td><td>Scrollable list of items</td></tr><tr><td><code>uiGrid</code></td><td>Grid layout container for inventory-style displays</td></tr><tr><td><code>uiTooltip</code></td><td>Context-sensitive popup text on hover</td></tr><tr><td><code>uiDialog</code></td><td>Dialog box with text, portrait, and response options</td></tr><tr><td><code>uiMinimap</code></td><td>Miniature map view with entity tracking</td></tr></tbody></table></div><div class="code-header"><span>UI health bar example</span></div><pre><code>{
-  "name": "PlayerHealthBar",
-  "visualsPath": "ui/health_bar",
-  "renderLayer": 10,
+}</code></pre>
+
+<h2 id="custom-enemies">Creating Custom Enemies</h2>
+<p>A custom enemy requires at minimum three components: an <strong>AI</strong> component for behavior, a <strong>mob</strong> component for health and damage, and a <strong>movement</strong> component for locomotion.</p>
+
+<div class="card-grid"><div class="card"><div class="card-title">AI Component</div><div class="card-desc">References a behavior tree template via <code>templateID</code> and provides <code>resolution</code> overrides for entity-specific behavior.</div></div><div class="card"><div class="card-title">MobComponent</div><div class="card-desc">Defines health, contact damage, invincibility frames, and knockback properties for damageable entities.</div></div><div class="card"><div class="card-title">Movement Component</div><div class="card-desc">Controls movement speed. Used by AI commands like <code>ai.moveToTarget</code> and <code>ai.patrol</code>.</div></div><div class="card"><div class="card-title">Animator Component</div><div class="card-desc">Maps animation triggers to frame events, enabling synchronized attacks, sounds, and visual effects.</div></div></div>
+
+<h3 id="enemy-example">Complete Enemy Example</h3>
+<div class="code-header"><span>fire_imp.mob.json</span></div>
+<pre><code>{
+  "name": "Fire Imp",
+  "visualsPath": "enemies/fire_imp",
+  "renderLayer": 5,
+  "colliderSizeX": 10,
+  "colliderSizeY": 14,
+  "physicsLayer": 3,
+  "collisionLayerMask": [1, 2, 4, 5],
   "components": {
-    "uiPanel": {
-      "width": 120,
-      "height": 16,
-      "color": "#1a1a2e",
-      "opacity": 0.8
+    "animator": {
+      "triggers": {
+        "attack": { "cast": 5, "release": 8 }
+      }
     },
-    "uiProgressBar": {
-      "width": 116,
-      "height": 12,
-      "fillColor": "#e74c3c",
-      "backgroundColor": "#2c3e50",
-      "value": 1.0,
-      "bindTo": "player.health"
+    "ai": {
+      "templateID": "ranged_chase",
+      "resolution": {
+        "attackAction": {
+          "commands": ["entity.animate attack,once"]
+        }
+      }
+    },
+    "mob": {
+      "health": 25,
+      "damage": 8,
+      "invincibilityTime": 0.2,
+      "knockbackForce": 100
+    },
+    "movement": {
+      "speed": 55.0
+    },
+    "weaponHandler": {}
+  },
+  "model": {
+    "id": "fire_imp",
+    "namespc": "enemies",
+    "animation": {},
+    "events": {
+      "animator.attack.release": {
+        "fireProjectile": {}
+      }
     }
   }
-}</code></pre><div class="callout info"><div class="callout-title">Note</div>UI entities use the same component system as game entities. You can combine UI components with event handling to create interactive menus, HUDs, and dialogs.</div><h2 id="tips-best-practices">Tips and Best Practices</h2><h3>Entity Design</h3><ul><li><strong>Keep entities focused.</strong> Each entity should represent one logical game object. Avoid putting unrelated behaviors on the same entity.</li><li><strong>Use descriptive names.</strong> Entity names like <code>fire_bat</code> or <code>health_potion_drop</code> are easier to work with than <code>entity_001</code>.</li><li><strong>Set appropriate physics layers.</strong> Only include layers in <code>collisionLayerMask</code> that the entity actually needs to interact with. Fewer collision checks means better performance.</li><li><strong>Start simple.</strong> Begin with the minimum set of components and add complexity incrementally. Test after each change.</li></ul><h3>Performance</h3><ul><li><strong>Use <code>entity.onVisible</code></strong> to defer expensive operations until an entity is on screen.</li><li><strong>Limit AI complexity</strong> for entities that appear in large numbers. Simple patrol trees are cheaper than complex multi-branch decision trees.</li><li><strong>Reuse behavior tree templates</strong> with <code>templateID</code> instead of duplicating tree definitions. The engine caches resolved templates.</li><li><strong>Prefer smaller collision radii</strong> when precise collision is not critical. Larger colliders require more collision checks.</li></ul><h3>Modding Workflow</h3><ul><li><strong>Copy and modify</strong> existing entities rather than building from scratch. This ensures you do not miss required fields.</li><li><strong>Use the AI editor</strong> at <a href="https://jaschez.github.io/blastback/ai-editor/">jaschez.github.io/blastback/ai-editor</a> for behavior trees instead of hand-editing JSON.</li><li><strong>Test incrementally.</strong> Add one component at a time and verify each works before adding the next.</li><li><strong>Check the console</strong> for error messages if an entity does not behave as expected. The engine logs missing components, invalid parameters, and broken references.</li></ul><h2 id="common-pitfalls">Common Pitfalls</h2><div class="callout warning"><div class="callout-title">Watch Out For These</div><p>These are the most frequent issues encountered when modding Blastback Engine:</p></div><h3>1. Missing or Mismatched Physics Layers</h3><p>If your entity does not collide with anything, check that <code>physicsLayer</code> and <code>collisionLayerMask</code> are set correctly. Remember that collision is bidirectional -- both entities must include each other's layer in their mask.</p><h3>2. Behavior Tree File Naming</h3><p>BT files <strong>must</strong> be named <code>bt.[ID].json</code>. If you name a file <code>slime_patrol.json</code> instead of <code>bt.slime_patrol.json</code>, the engine will not recognize it as a behavior tree.</p><h3>3. Invalid Visual Paths</h3><p>The <code>visualsPath</code> must point to an existing asset in the <code>Content/Sprites/</code> directory. Omit the file extension -- the engine resolves the correct format automatically. Use forward slashes for path separators.</p><h3>4. Circular Template References</h3><p>If behavior tree template A references template B, and template B references template A, the resolution system will fail. Always ensure template references form a directed acyclic graph.</p><h3>5. Forgetting the commandMap</h3><p>If you add a component that should respond to events but nothing happens, verify that the <code>commandMap</code> is properly configured. Commands are only routed to components that explicitly declare handlers for them.</p><h3>6. Overlapping Collider Sizes</h3><p>If colliders are too large relative to the sprite, entities will appear to collide before they visually touch. Match <code>colliderSizeX</code> and <code>colliderSizeY</code> to the sprite's actual hit area, not the full image bounds.</p><h3>7. Animation Frame Mismatches</h3><p>Trigger frame numbers in the <code>animator</code> component must match actual frames in the <code>.ase</code> file. If a trigger references frame 8 but the animation only has 6 frames, the event will never fire.</p><div class="callout info"><div class="callout-title">Need Help?</div>Refer to the <a href="/reference/components-overview">Components Reference</a> for detailed documentation on every component's parameters, commands, and events. The <a href="/reference/models-overview">Models Reference</a> covers all data model schemas.</div>
+}</code></pre>
+
+<h3 id="mob-fields">MobComponent Fields</h3>
+<div class="table-wrapper"><table>
+<thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><code>health</code></td><td>int</td><td>Maximum hit points for the entity.</td></tr>
+<tr><td><code>damage</code></td><td>int</td><td>Contact damage dealt to the player on collision.</td></tr>
+<tr><td><code>invincibilityTime</code></td><td>float</td><td>Seconds of invulnerability after taking a hit.</td></tr>
+<tr><td><code>knockbackForce</code></td><td>float</td><td>Force applied to the entity when hit.</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout tip"><div class="callout-title">Tip</div>Use the <code>resolution</code> field in the AI component to customize shared behavior tree templates for each enemy. Many enemies can share the same BT file but with different attack animations, patrol distances, and reactions. See the <a href="/guides/behavior-trees#resolution-system">Resolution System</a> documentation for details.</div>
+
+<h2 id="custom-ui">Custom UI Elements</h2>
+<p>The engine provides a set of UI components for building in-game interfaces. UI elements are defined similarly to other entities but target the UI rendering layer.</p>
+
+<div class="card-grid"><div class="card"><div class="card-title">Bar / BarGroup</div><div class="card-desc">Health bars, energy bars, stamina bars, and grouped bar displays with customizable colors and segments.</div></div><div class="card"><div class="card-title">Button</div><div class="card-desc">Interactive buttons with hover states, click commands, and configurable visual styles.</div></div><div class="card"><div class="card-title">Text / Image</div><div class="card-desc">Static and dynamic text labels, formatted strings, and image display elements.</div></div><div class="card"><div class="card-title">SelectionGroup</div><div class="card-desc">Menu navigation, inventory grids, and selection interfaces with keyboard and gamepad support.</div></div><div class="card"><div class="card-title">Panel / Container</div><div class="card-desc">Layout containers for grouping and positioning child UI elements with alignment and padding options.</div></div><div class="card"><div class="card-title">Tooltip / Dialog</div><div class="card-desc">Context-sensitive tooltips and dialog boxes for item descriptions, NPC conversations, and system alerts.</div></div></div>
+
+<div class="code-header"><span>Example: Custom health bar UI</span></div>
+<pre><code>{
+  "name": "PlayerHealthBar",
+  "visualsPath": "ui/health_bar",
+  "renderLayer": 0,
+  "components": {
+    "uiBar": {
+      "trackedValue": "player.health",
+      "maxValue": "player.maxHealth",
+      "fillColor": "#e74c3c",
+      "backgroundColor": "#2c3e50",
+      "width": 120,
+      "height": 12
+    },
+    "uiPosition": {
+      "anchor": "topLeft",
+      "offsetX": 16,
+      "offsetY": 16
+    }
+  }
+}</code></pre>
+
+<div class="code-header"><span>Example: Interactive menu button</span></div>
+<pre><code>{
+  "name": "StartButton",
+  "visualsPath": "ui/button_large",
+  "renderLayer": 0,
+  "components": {
+    "uiButton": {
+      "label": "Start Game",
+      "fontSize": 16,
+      "commandMap": {
+        "onClick": "game.loadScene main_level",
+        "onHover": "entity.animate hover,loop"
+      }
+    },
+    "uiPosition": {
+      "anchor": "center",
+      "offsetX": 0,
+      "offsetY": 40
+    }
+  }
+}</code></pre>
+
+<h2 id="best-practices">Tips and Best Practices</h2>
+<ul>
+<li><strong>Use shared BT templates</strong> &mdash; Define common behavior patterns in <code>bt.*.json</code> files and customize via the <code>resolution</code> system rather than duplicating trees.</li>
+<li><strong>Keep physics layers minimal</strong> &mdash; Only include necessary layers in <code>collisionLayerMask</code> to improve performance and avoid unintended interactions.</li>
+<li><strong>Use renderLayer wisely</strong> &mdash; Lower numbers render on top. Group similar entity types on the same layer for consistent visual ordering.</li>
+<li><strong>Name entities clearly</strong> &mdash; The <code>name</code> field appears in debug tools and error logs. Use descriptive, unique names.</li>
+<li><strong>Test incrementally</strong> &mdash; Start with a minimal entity definition and add components one at a time, testing after each addition.</li>
+<li><strong>Keep sprites organized</strong> &mdash; Mirror the entity folder structure in your <code>Sprites/</code> directory so <code>visualsPath</code> references stay intuitive.</li>
+<li><strong>Use animation triggers</strong> &mdash; Synchronize gameplay events (damage, projectile spawning, sound effects) with specific animation frames via the <code>animator</code> component's trigger system.</li>
+<li><strong>Set maxAmmo to -1 for melee</strong> &mdash; Melee weapons should use <code>-1</code> for unlimited ammo rather than a high arbitrary number.</li>
+<li><strong>Copy and modify existing entities</strong> &mdash; Start from a working entity that is similar to what you want, then change properties. This avoids missing required fields.</li>
+<li><strong>Use the AI editor</strong> &mdash; The <a href="https://jaschez.github.io/blastback/ai-editor/" target="_blank">Online AI Editor</a> is faster and less error-prone than hand-editing behavior tree JSON.</li>
+</ul>
+
+<h2 id="common-pitfalls">Common Pitfalls and Debugging</h2>
+
+<div class="callout warning"><div class="callout-title">Common Mistakes to Avoid</div>
+<ul>
+<li><strong>Missing physics layer</strong>: Entities without a <code>physicsLayer</code> field will not participate in collision detection at all. Always set this field for any entity that needs to collide.</li>
+<li><strong>Wrong file suffix</strong>: The model type is determined by the filename suffix. <code>goblin.mob.json</code> creates a mob model; <code>goblin.json</code> creates a generic entity without mob features like health tracking.</li>
+<li><strong>Circular BT references</strong>: Behavior tree templates that reference themselves (directly or indirectly) will cause an infinite loop at load time, crashing the engine.</li>
+<li><strong>Animation frame mismatch</strong>: Trigger frame numbers in the <code>animator</code> component must match actual frame indices in the <code>.ase</code> sprite file. Frame numbers are zero-indexed.</li>
+<li><strong>Missing visualsPath</strong>: If the sprite file does not exist at the path specified in <code>visualsPath</code>, the entity will load but be invisible. Check the engine console for missing asset warnings.</li>
+<li><strong>Forgotten weaponHandler</strong>: Enemies that use ranged attacks need a <code>weaponHandler</code> component (even if empty <code>{}</code>) to fire projectiles. Without it, the <code>fireProjectile</code> event will have no effect.</li>
+<li><strong>Collision layer 9</strong>: Layer 9 is reserved for internal engine use. Assigning entities to this layer will cause undefined behavior.</li>
+<li><strong>Bidirectional collision</strong>: Collision detection requires both entities to include each other's layer in their respective <code>collisionLayerMask</code>. If only one side includes the other, no collision will be detected.</li>
+</ul>
+</div>
+
+<h3 id="debugging-tips">Debugging Tips</h3>
+<div class="callout info"><div class="callout-title">Debug Tools</div>
+<ul>
+<li>Enable the <strong>physics debug overlay</strong> to visualize colliders and trigger zones in real time.</li>
+<li>Use the <strong>entity inspector</strong> to view component states, current AI node, and event logs for any entity.</li>
+<li>Check the <strong>engine console</strong> for warnings about missing assets, invalid JSON syntax, and unresolved BT template references.</li>
+<li>The <a href="https://jaschez.github.io/blastback/ai-editor/" target="_blank">Online AI Editor</a> can import and validate your behavior tree files, highlighting structural errors before you test in-game.</li>
+</ul>
+</div>
       </div>
       <div class="page-footer"><a href="./behavior-trees.html">&#8592; Behavior Trees</a><a href="../reference/models/visual-model.html">VisualModel &#8594;</a></div>
     </div>
-    <div class="toc-sidebar"><div class="toc-sidebar-title">On this page</div><a href="#creating-custom-entities" class="depth-2">Creating Custom Entities</a><a href="#naming-convention" class="depth-3">File Naming Convention</a><a href="#component-system" class="depth-2">Working with the Component System</a><a href="#custom-weapons" class="depth-2">Creating Custom Weapons</a><a href="#weapon-model" class="depth-3">WeaponModel</a><a href="#shooter-component" class="depth-3">ShooterComponent</a><a href="#melee-component" class="depth-3">MeleeComponent</a><a href="#custom-projectiles" class="depth-2">Creating Projectiles</a><a href="#ui-elements" class="depth-2">Creating UI Elements</a><a href="#tips-best-practices" class="depth-2">Tips and Best Practices</a><a href="#common-pitfalls" class="depth-2">Common Pitfalls</a></div>
+    <div class="toc-sidebar"><div class="toc-sidebar-title">On this page</div><a href="#introduction" class="depth-2">Introduction for Modders</a><a href="#project-structure" class="depth-2">Project File Structure</a><a href="#naming-conventions" class="depth-3">File Naming Conventions</a><a href="#creating-entities" class="depth-2">Creating Custom Entities</a><a href="#minimal-entity" class="depth-3">Minimal Entity Example</a><a href="#interactive-entity" class="depth-3">Interactive Entity with Events</a><a href="#custom-weapons" class="depth-2">Creating Custom Weapons</a><a href="#ranged-weapon" class="depth-3">Ranged Weapon Example</a><a href="#shooter-fields" class="depth-3">ShooterComponent Fields</a><a href="#melee-weapon" class="depth-3">Melee Weapon Example</a><a href="#melee-fields" class="depth-3">MeleeComponent Fields</a><a href="#projectile-entity" class="depth-3">Creating the Projectile Entity</a><a href="#custom-enemies" class="depth-2">Creating Custom Enemies</a><a href="#enemy-example" class="depth-3">Complete Enemy Example</a><a href="#mob-fields" class="depth-3">MobComponent Fields</a><a href="#custom-ui" class="depth-2">Custom UI Elements</a><a href="#best-practices" class="depth-2">Tips and Best Practices</a><a href="#common-pitfalls" class="depth-2">Common Pitfalls and Debugging</a><a href="#debugging-tips" class="depth-3">Debugging Tips</a></div>
   </main>
 
   <div class="search-modal-overlay">
@@ -209,7 +427,7 @@
     </div>
   </div>
 
-  <script>window.searchIndex = [{"title":"Behavior Trees","url":"guides/behavior-trees.html","category":"Getting Started","description":"Understand how to design and implement AI behavior trees in the Blastback Engine.","keywords":"behavior tree AI nodes commands decorator sequence selector patrol chase resolution"},{"title":"Entity Scripting","url":"guides/entity-scripting.html","category":"Getting Started","description":"Learn how to create and script entities in the Blastback Engine.","keywords":"entity scripting lua components events commands"},{"title":"Getting Started with Blastback Engine","url":"guides/getting-started.html","category":"Getting Started","description":"Learn the fundamentals of Blastback Engine, including project structure, entity definitions, file conventions, physics layers, and the event system.","keywords":"getting started introduction project structure entities physics layers file conventions events commands"},{"title":"Modding Guide","url":"guides/modding-guide.html","category":"Guides","description":"A comprehensive guide for creating mods in Blastback Engine, covering custom entities, weapons, UI elements, and best practices.","keywords":"modding mods custom entities weapons UI best practices WeaponModel ShooterComponent MeleeComponent"},{"title":"Blastback Engine Documentation","url":"index.html","category":"null","description":"Official documentation for the Blastback Engine — a 2D game engine with Lua scripting for modders and developers.","keywords":"blastback engine documentation lua scripting modding 2D game engine"},{"title":"AI System — Behavior Trees","url":"reference/ai-system.html","category":"Core Concepts > Reference","description":"Reference for the Blastback Engine AI system, covering behavior tree node structure, fields, node types, and the online AI editor.","keywords":"AI behavior tree BT nodes decorator commands conditions ai editor enemy AI"},{"title":"AI","url":"reference/components/ai.html","category":"Components > Mob","description":"Provides intelligent behavior using behavior tree definitions.","keywords":"ai behavior tree bt intelligence template resolution node"},{"title":"Animator Trigger","url":"reference/components/animator-trigger.html","category":"Components > Common","description":"Component that triggers animations based on events.","keywords":"animator trigger animation events animatorTrigger"},{"title":"Animator","url":"reference/components/animator.html","category":"Components > Common","description":"Handles entity visuals. Only for animated visuals (.ase with animation tags). Alternative: entity.animate {animationName},{loopMode} command.","keywords":"animator animation visuals sprite ase animation tags triggers frames"},{"title":"Bar Group","url":"reference/components/bar-group.html","category":"Components > UI","description":"UI component for grouping multiple bar elements together.","keywords":"bar group ui hud status layout"},{"title":"Bar","url":"reference/components/bar.html","category":"Components > UI","description":"Progress or health bar UI element for displaying values visually.","keywords":"bar ui health progress meter resource"},{"title":"Button","url":"reference/components/button.html","category":"Components > UI","description":"Interactive button UI element for triggering actions.","keywords":"button ui click interactive action press"},{"title":"Comic","url":"reference/components/comic.html","category":"Components > UI","description":"Comic and dialogue panel UI component for narrative sequences.","keywords":"comic ui panel dialogue narrative cutscene story"},{"title":"Control Handler","url":"reference/components/control-handler.html","category":"Components > Mob","description":"Manages entity control states and transitions.","keywords":"control handler state transitions control handler"},{"title":"Image","url":"reference/components/image.html","category":"Components > UI","description":"Image display UI element for rendering sprites and textures.","keywords":"image ui sprite texture display icon"},{"title":"Input Trigger","url":"reference/components/input-trigger.html","category":"Components > UI","description":"UI component that triggers actions in response to player input.","keywords":"input trigger action UI keybind event"},{"title":"Input","url":"reference/components/input.html","category":"Components > Common","description":"Provides input handling for entities.","keywords":"input controls provider handling keyboard gamepad"},{"title":"Interaction Handler","url":"reference/components/interaction-handler.html","category":"Components > Mob","description":"Handles entity interactions with other entities.","keywords":"interaction handler entities interact"},{"title":"Levitation","url":"reference/components/levitation.html","category":"Components > Mob","description":"Provides floating/levitation behavior for entities.","keywords":"levitation float hover height amplitude flying"},{"title":"Melee Component","url":"reference/components/melee-component.html","category":"Components > Weapon","description":"Melee weapon behavior with attack patterns and hit detection.","keywords":"melee weapon attack hit detection combat swing"},{"title":"Mob Component","url":"reference/components/mob-component.html","category":"Components > Mob","description":"Core mob behavior component providing health, damage, and basic mob properties.","keywords":"mob health damage invincibility knockback enemy"},{"title":"Movement","url":"reference/components/movement.html","category":"Components > Mob","description":"Base movement component for entities.","keywords":"movement speed acceleration motion velocity"},{"title":"Player Movement","url":"reference/components/player-movement.html","category":"Components > Mob","description":"Player-specific movement with dash and dodge abilities.","keywords":"player movement dash dodge abilities player movement"},{"title":"Rideable Shooter","url":"reference/components/rideable-shooter.html","category":"Components > Weapon","description":"Shooter component for rideable/mountable entities.","keywords":"rideable shooter mount weapon turret"},{"title":"Selection Group","url":"reference/components/selection-group.html","category":"Components > UI","description":"UI selection group component for menu navigation and item selection.","keywords":"selection group ui menu navigation selectable"},{"title":"Shooter Component","url":"reference/components/shooter-component.html","category":"Components > Weapon","description":"Ranged weapon component for projectile-based attacks.","keywords":"shooter ranged projectile weapon gun burst"},{"title":"Spawner","url":"reference/components/spawner.html","category":"Components > Common","description":"Handles entity spawning logic.","keywords":"spawner spawn entities delay count instantiate"},{"title":"Steering Movement","url":"reference/components/steering-movement.html","category":"Components > Mob","description":"Steering-based movement for AI entities using seek/flee/wander behaviors.","keywords":"steering movement ai seek flee wander behavior"},{"title":"Text","url":"reference/components/text.html","category":"Components > UI","description":"Text display UI element for rendering styled text content.","keywords":"text label font UI display typography"},{"title":"Trigger","url":"reference/components/trigger.html","category":"Components > Common","description":"Listens and responds to trigger events.","keywords":"trigger events commands listener response"},{"title":"UI Entity","url":"reference/components/ui-entity.html","category":"Components > UI","description":"Base UI entity component that marks an entity as part of the UI layer.","keywords":"UI entity base layer interface HUD"},{"title":"Upgrade Group","url":"reference/components/upgrade-group.html","category":"Components > UI","description":"UI component for displaying and selecting from a group of upgrades.","keywords":"upgrade group selection UI powerup levelup"},{"title":"Wander","url":"reference/components/wander.html","category":"Components > UI","description":"UI element component that wanders or drifts randomly across the screen.","keywords":"wander drift random movement UI animation"},{"title":"Waver","url":"reference/components/waver.html","category":"Components > UI","description":"UI element component that applies a wave animation effect.","keywords":"waver wave animation oscillate UI effect"},{"title":"Weapon Component","url":"reference/components/weapon-component.html","category":"Components > Weapon","description":"Base weapon component defining shared weapon properties.","keywords":"weapon component damage knockback combat base"},{"title":"Weapon Handler","url":"reference/components/weapon-handler.html","category":"Components > Mob","description":"Manages weapon equipping, switching, and usage for entities.","keywords":"weapon handler equip switch combat inventory"},{"title":"Components Overview","url":"reference/components-overview.html","category":"Core Concepts > Reference","description":"Overview of the Blastback Engine component system, including the base component schema, commandMap, and a categorized listing of all available components.","keywords":"components component system commandMap animator input spawner trigger ai weapon UI mob"},{"title":"Entity Reference","url":"reference/entities.html","category":"Core Concepts > Reference","description":"Complete reference for the Blastback Engine Entity structure, including schema, fields, functions, events, and the physics extension.","keywords":"entity entities schema physics collider render layer components model events builtin"},{"title":"Lua Scripting API","url":"reference/lua-scripting.html","category":"Core Concepts","description":"Complete reference for the Blastback Engine Lua scripting API — the ctx object, engine globals, timers, buffers, commands, and lifecycle hooks.","keywords":"lua scripting moonsharp ctx context commands events timers buffers input api"},{"title":"DropModel","url":"reference/models/drop-model.html","category":"Models","description":"Defines item drop behavior when entities are destroyed.","keywords":"drop loot item destroy reward chance quantity model"},{"title":"ParticleSpawnModel","url":"reference/models/particle-spawn-model.html","category":"Models","description":"Defines particle emission properties for visual effects.","keywords":"particle spawn emission effect visual vfx model"},{"title":"PersistentWeaponModel","url":"reference/models/persistent-weapon-model.html","category":"Models","description":"Weapon model that persists across scenes and rooms, retaining state between transitions.","keywords":"weapon persistent save scene room transition state model"},{"title":"ProjectileModel","url":"reference/models/projectile-model.html","category":"Models","description":"Defines projectile behavior for ranged weapons.","keywords":"projectile bullet ranged speed damage piercing gravity model"},{"title":"VisualModel","url":"reference/models/visual-model.html","category":"Models","description":"Defines visual properties and appearance for entities.","keywords":"visual sprite appearance scale color opacity rendering model"},{"title":"WeaponModel","url":"reference/models/weapon-model.html","category":"Models","description":"Defines weapon properties including cooldown, ammunition, visuals, and components.","keywords":"weapon cooldown ammo ammunition attack combat model"},{"title":"Models Overview","url":"reference/models-overview.html","category":"Core Concepts > Reference","description":"Overview of the Blastback Engine entity model system, including the base model schema, fields, and a categorized listing of all available model types.","keywords":"models entity model animation events visual model weapon model projectile model drop model particle"}];</script>
+  <script>window.searchIndex = [{"title":"Behavior Trees","url":"guides/behavior-trees.html","category":"Getting Started","description":"Understand how to design and implement AI behavior trees in the Blastback Engine.","keywords":"behavior tree AI nodes commands decorator sequence selector patrol chase resolution"},{"title":"Entity Scripting","url":"guides/entity-scripting.html","category":"Getting Started","description":"Learn how to create and script entities in the Blastback Engine.","keywords":"entity scripting lua components events commands"},{"title":"Getting Started with Blastback Engine","url":"guides/getting-started.html","category":"Getting Started","description":"Learn the fundamentals of Blastback Engine, including project structure, entity definitions, file conventions, physics layers, and the event system.","keywords":"getting started introduction project structure entities physics layers file conventions events commands"},{"title":"Modding Guide","url":"guides/modding-guide.html","category":"Guides","description":"A comprehensive guide for modders creating custom content for Blastback Engine games.","keywords":"modding custom entities weapons enemies UI tutorial best practices"},{"title":"Blastback Engine Documentation","url":"index.html","category":"null","description":"Official documentation for the Blastback Engine — a 2D game engine with Lua scripting for modders and developers.","keywords":"blastback engine documentation lua scripting modding 2D game engine"},{"title":"AI System — Behavior Trees","url":"reference/ai-system.html","category":"Core Concepts > Reference","description":"Reference for the Blastback Engine AI system, covering behavior tree node structure, fields, node types, and the online AI editor.","keywords":"AI behavior tree BT nodes decorator commands conditions ai editor enemy AI"},{"title":"AI","url":"reference/components/ai.html","category":"Components > Mob","description":"Provides intelligent behavior using behavior tree definitions.","keywords":"ai behavior tree bt intelligence template resolution node"},{"title":"Animator Trigger","url":"reference/components/animator-trigger.html","category":"Components > Common","description":"Component that triggers animations based on events.","keywords":"animator trigger animation events animatorTrigger"},{"title":"Animator","url":"reference/components/animator.html","category":"Components > Common","description":"Handles entity visuals. Only for animated visuals (.ase with animation tags). Alternative: entity.animate {animationName},{loopMode} command.","keywords":"animator animation visuals sprite ase animation tags triggers frames"},{"title":"Bar Group","url":"reference/components/bar-group.html","category":"Components > UI","description":"UI component for grouping multiple bar elements together.","keywords":"bar group ui hud status layout"},{"title":"Bar","url":"reference/components/bar.html","category":"Components > UI","description":"Progress or health bar UI element for displaying values visually.","keywords":"bar ui health progress meter resource"},{"title":"Button","url":"reference/components/button.html","category":"Components > UI","description":"Interactive button UI element for triggering actions.","keywords":"button ui click interactive action press"},{"title":"Comic","url":"reference/components/comic.html","category":"Components > UI","description":"Comic and dialogue panel UI component for narrative sequences.","keywords":"comic ui panel dialogue narrative cutscene story"},{"title":"Control Handler","url":"reference/components/control-handler.html","category":"Components > Mob","description":"Manages entity control states and transitions.","keywords":"control handler state transitions control handler"},{"title":"Image","url":"reference/components/image.html","category":"Components > UI","description":"Image display UI element for rendering sprites and textures.","keywords":"image ui sprite texture display icon"},{"title":"Input Trigger","url":"reference/components/input-trigger.html","category":"Components > UI","description":"UI component that triggers actions in response to player input.","keywords":"input trigger action UI keybind event"},{"title":"Input","url":"reference/components/input.html","category":"Components > Common","description":"Provides input handling for entities.","keywords":"input controls provider handling keyboard gamepad"},{"title":"Interaction Handler","url":"reference/components/interaction-handler.html","category":"Components > Mob","description":"Handles entity interactions with other entities.","keywords":"interaction handler entities interact"},{"title":"Levitation","url":"reference/components/levitation.html","category":"Components > Mob","description":"Provides floating/levitation behavior for entities.","keywords":"levitation float hover height amplitude flying"},{"title":"Melee Component","url":"reference/components/melee-component.html","category":"Components > Weapon","description":"Melee weapon behavior with attack patterns and hit detection.","keywords":"melee weapon attack hit detection combat swing"},{"title":"Mob Component","url":"reference/components/mob-component.html","category":"Components > Mob","description":"Core mob behavior component providing health, damage, and basic mob properties.","keywords":"mob health damage invincibility knockback enemy"},{"title":"Movement","url":"reference/components/movement.html","category":"Components > Mob","description":"Base movement component for entities.","keywords":"movement speed acceleration motion velocity"},{"title":"Player Movement","url":"reference/components/player-movement.html","category":"Components > Mob","description":"Player-specific movement with dash and dodge abilities.","keywords":"player movement dash dodge abilities player movement"},{"title":"Rideable Shooter","url":"reference/components/rideable-shooter.html","category":"Components > Weapon","description":"Shooter component for rideable/mountable entities.","keywords":"rideable shooter mount weapon turret"},{"title":"Selection Group","url":"reference/components/selection-group.html","category":"Components > UI","description":"UI selection group component for menu navigation and item selection.","keywords":"selection group ui menu navigation selectable"},{"title":"Shooter Component","url":"reference/components/shooter-component.html","category":"Components > Weapon","description":"Ranged weapon component for projectile-based attacks.","keywords":"shooter ranged projectile weapon gun burst"},{"title":"Spawner","url":"reference/components/spawner.html","category":"Components > Common","description":"Handles entity spawning logic.","keywords":"spawner spawn entities delay count instantiate"},{"title":"Steering Movement","url":"reference/components/steering-movement.html","category":"Components > Mob","description":"Steering-based movement for AI entities using seek/flee/wander behaviors.","keywords":"steering movement ai seek flee wander behavior"},{"title":"Text","url":"reference/components/text.html","category":"Components > UI","description":"Text display UI element for rendering styled text content.","keywords":"text label font UI display typography"},{"title":"Trigger","url":"reference/components/trigger.html","category":"Components > Common","description":"Listens and responds to trigger events.","keywords":"trigger events commands listener response"},{"title":"UI Entity","url":"reference/components/ui-entity.html","category":"Components > UI","description":"Base UI entity component that marks an entity as part of the UI layer.","keywords":"UI entity base layer interface HUD"},{"title":"Upgrade Group","url":"reference/components/upgrade-group.html","category":"Components > UI","description":"UI component for displaying and selecting from a group of upgrades.","keywords":"upgrade group selection UI powerup levelup"},{"title":"Wander","url":"reference/components/wander.html","category":"Components > UI","description":"UI element component that wanders or drifts randomly across the screen.","keywords":"wander drift random movement UI animation"},{"title":"Waver","url":"reference/components/waver.html","category":"Components > UI","description":"UI element component that applies a wave animation effect.","keywords":"waver wave animation oscillate UI effect"},{"title":"Weapon Component","url":"reference/components/weapon-component.html","category":"Components > Weapon","description":"Base weapon component defining shared weapon properties.","keywords":"weapon component damage knockback combat base"},{"title":"Weapon Handler","url":"reference/components/weapon-handler.html","category":"Components > Mob","description":"Manages weapon equipping, switching, and usage for entities.","keywords":"weapon handler equip switch combat inventory"},{"title":"Components Overview","url":"reference/components-overview.html","category":"Core Concepts > Reference","description":"Overview of the Blastback Engine component system, including the base component schema, commandMap, and a categorized listing of all available components.","keywords":"components component system commandMap animator input spawner trigger ai weapon UI mob"},{"title":"Entity Reference","url":"reference/entities.html","category":"Core Concepts > Reference","description":"Complete reference for the Blastback Engine Entity structure, including schema, fields, functions, events, and the physics extension.","keywords":"entity entities schema physics collider render layer components model events builtin"},{"title":"Lua Scripting API","url":"reference/lua-scripting.html","category":"Core Concepts","description":"Complete reference for the Blastback Engine Lua scripting API — the ctx object, engine globals, timers, buffers, commands, and lifecycle hooks.","keywords":"lua scripting moonsharp ctx context commands events timers buffers input api"},{"title":"DropModel","url":"reference/models/drop-model.html","category":"Models","description":"Defines item drop behavior when entities are destroyed.","keywords":"drop loot item destroy reward chance quantity model"},{"title":"ParticleSpawnModel","url":"reference/models/particle-spawn-model.html","category":"Models","description":"Defines particle emission properties for visual effects.","keywords":"particle spawn emission effect visual vfx model"},{"title":"PersistentWeaponModel","url":"reference/models/persistent-weapon-model.html","category":"Models","description":"Weapon model that persists across scenes and rooms, retaining state between transitions.","keywords":"weapon persistent save scene room transition state model"},{"title":"ProjectileModel","url":"reference/models/projectile-model.html","category":"Models","description":"Defines projectile behavior for ranged weapons.","keywords":"projectile bullet ranged speed damage piercing gravity model"},{"title":"VisualModel","url":"reference/models/visual-model.html","category":"Models","description":"Defines visual properties and appearance for entities.","keywords":"visual sprite appearance scale color opacity rendering model"},{"title":"WeaponModel","url":"reference/models/weapon-model.html","category":"Models","description":"Defines weapon properties including cooldown, ammunition, visuals, and components.","keywords":"weapon cooldown ammo ammunition attack combat model"},{"title":"Models Overview","url":"reference/models-overview.html","category":"Core Concepts > Reference","description":"Overview of the Blastback Engine entity model system, including the base model schema, fields, and a categorized listing of all available model types.","keywords":"models entity model animation events visual model weapon model projectile model drop model particle"}];</script>
   <script src="../assets/js/main.js"></script>
 </body>
 </html>
