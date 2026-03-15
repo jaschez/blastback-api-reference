@@ -1,0 +1,11 @@
+{
+  "title": "Selection Group",
+  "slug": "reference/components/selection-group",
+  "section": "Components",
+  "subsection": "UI",
+  "order": 1,
+  "navTitle": "SelectionGroup",
+  "description": "UI selection group component for menu navigation and item selection.",
+  "keywords": ["selection", "group", "ui", "menu", "navigation", "selectable"],
+  "content": "<h1 id=\"selection-group\">Selection Group</h1>\n<p class=\"page-subtitle\">UI selection group component for managing menu navigation and selectable item groups.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-ui\">UI</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>\"selectionGroup\": {\n  \"defaultIndex\": 0,\n  \"wrap\": true,\n  \"orientation\": \"...\"\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>SelectionGroup</strong> component manages groups of selectable UI items for menu navigation. It handles directional navigation between items, tracks the currently selected index, and supports input-driven selection changes. This component is essential for building navigable menus, option lists, and any UI that requires cycling through selectable items.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td>defaultIndex</td><td>int</td><td>The index of the item selected by default when the group is displayed.</td></tr>\n<tr><td>wrap</td><td>bool</td><td>Whether navigation wraps around from the last item to the first.</td></tr>\n<tr><td>orientation</td><td>string</td><td>Navigation axis for the group (\"horizontal\" or \"vertical\").</td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"components\": {\n    \"selectionGroup\": {\n      \"defaultIndex\": 0,\n      \"wrap\": true,\n      \"orientation\": \"vertical\"\n    }\n  }\n}</code></pre>"
+}

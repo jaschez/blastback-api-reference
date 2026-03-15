@@ -1,0 +1,11 @@
+{
+  "title": "Movement",
+  "slug": "reference/components/movement",
+  "section": "Components",
+  "subsection": "Mob",
+  "order": 6,
+  "navTitle": "Movement",
+  "description": "Base movement component for entities.",
+  "keywords": ["movement", "speed", "acceleration", "motion", "velocity"],
+  "content": "<h1 id=\"title\">Movement</h1>\n<p class=\"page-subtitle\">Base movement component for entities.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-mob\">Mob</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"movement\": {\n    \"speed\": 5.0,\n    \"acceleration\": 10.0\n  }\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>Movement</strong> component is the base movement component for entities. It defines fundamental movement properties such as speed and acceleration that control how an entity moves through the game world.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td><code>speed</code></td><td><code>float</code></td><td>The movement speed of the entity.</td></tr>\n<tr><td><code>acceleration</code></td><td><code>float</code></td><td>The acceleration rate of the entity.</td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"movement\": {\n    \"speed\": 8.0,\n    \"acceleration\": 15.0\n  }\n}</code></pre>"
+}

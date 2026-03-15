@@ -1,0 +1,11 @@
+{
+  "title": "Bar Group",
+  "slug": "reference/components/bar-group",
+  "section": "Components",
+  "subsection": "UI",
+  "order": 2,
+  "navTitle": "BarGroup",
+  "description": "UI component for grouping multiple bar elements together.",
+  "keywords": ["bar", "group", "ui", "hud", "status", "layout"],
+  "content": "<h1 id=\"bar-group\">Bar Group</h1>\n<p class=\"page-subtitle\">UI component for grouping and laying out multiple bar elements such as health and resource indicators.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-ui\">UI</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>\"barGroup\": {\n  \"spacing\": 0.0,\n  \"orientation\": \"...\"\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>BarGroup</strong> component groups and manages multiple bar UI elements. It provides layout coordination for collections of bars, such as health and mana bars displayed together in a HUD. The component handles spacing and orientation so that grouped bars are rendered consistently.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td>spacing</td><td>float</td><td>Pixel spacing between each bar in the group.</td></tr>\n<tr><td>orientation</td><td>string</td><td>Layout direction for the bars (\"horizontal\" or \"vertical\").</td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"components\": {\n    \"barGroup\": {\n      \"spacing\": 4.0,\n      \"orientation\": \"vertical\"\n    }\n  }\n}</code></pre>"
+}

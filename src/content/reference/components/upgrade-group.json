@@ -1,0 +1,11 @@
+{
+  "title": "Upgrade Group",
+  "slug": "reference/components/upgrade-group",
+  "section": "Components",
+  "subsection": "UI",
+  "order": 10,
+  "navTitle": "UpgradeGroup",
+  "description": "UI component for displaying and managing upgrade selection interfaces.",
+  "keywords": ["upgrade", "group", "ui", "selection", "levelup", "skills", "perks"],
+  "content": "<h1 id=\"title\">Upgrade Group</h1>\n<p class=\"page-subtitle\">UI component for displaying and managing upgrade selection interfaces.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-ui\">UI</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"upgradeGroup\": {}\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>Upgrade Group</strong> component displays and manages upgrade selection interfaces. It presents available upgrades to the player and handles the selection process, commonly used for level-up screens, skill trees, and perk selection menus.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td colspan=\"3\"><em>Upgrade options and layout are configured through UI properties.</em></td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"upgradeGroup\": {}\n}</code></pre>"
+}

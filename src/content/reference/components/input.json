@@ -1,0 +1,11 @@
+{
+  "title": "Input",
+  "slug": "reference/components/input",
+  "section": "Components",
+  "subsection": "Common",
+  "order": 3,
+  "navTitle": "Input",
+  "description": "Provides input handling for entities.",
+  "keywords": ["input", "controls", "provider", "handling", "keyboard", "gamepad"],
+  "content": "<h1 id=\"title\">Input</h1>\n<p class=\"page-subtitle\">Provides input handling for entities.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-common\">Common</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"input\": {\n    \"provider\": \"providerType\"\n  }\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>Input</strong> component provides input handling for entities. It connects an entity to an input provider, allowing it to receive and respond to player input or other input sources.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td><code>provider</code></td><td><code>string</code></td><td>The input provider type that supplies input data to the entity.</td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"input\": {\n    \"provider\": \"player1\"\n  }\n}</code></pre>"
+}

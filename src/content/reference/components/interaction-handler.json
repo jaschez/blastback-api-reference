@@ -1,0 +1,11 @@
+{
+  "title": "Interaction Handler",
+  "slug": "reference/components/interaction-handler",
+  "section": "Components",
+  "subsection": "Mob",
+  "order": 3,
+  "navTitle": "InteractionHandler",
+  "description": "Handles entity interactions with other entities.",
+  "keywords": ["interaction", "handler", "entities", "interact"],
+  "content": "<h1 id=\"title\">Interaction Handler</h1>\n<p class=\"page-subtitle\">Handles entity interactions with other entities.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-mob\">Mob</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"interactionHandler\": {}\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>Interaction Handler</strong> component handles entity interactions with other entities. It provides the framework for detecting and responding to interactions between entities in the game world.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td colspan=\"3\"><em>No configurable fields. The component operates with default interaction behavior.</em></td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"interactionHandler\": {}\n}</code></pre>"
+}

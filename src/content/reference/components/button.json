@@ -1,0 +1,11 @@
+{
+  "title": "Button",
+  "slug": "reference/components/button",
+  "section": "Components",
+  "subsection": "UI",
+  "order": 4,
+  "navTitle": "Button",
+  "description": "Interactive button UI element for triggering actions.",
+  "keywords": ["button", "ui", "click", "interactive", "action", "press"],
+  "content": "<h1 id=\"button\">Button</h1>\n<p class=\"page-subtitle\">Interactive button UI element that executes commands when activated by the player.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-ui\">UI</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>\"button\": {\n  \"text\": \"...\",\n  \"onClick\": []\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>Button</strong> component provides an interactive clickable UI element. It displays a text label and executes a list of commands when activated by the player through clicking or pressing. Buttons support hover and pressed visual states and are commonly used in menus, dialog prompts, and in-game interfaces.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td>text</td><td>string</td><td>The display label shown on the button.</td></tr>\n<tr><td>onClick</td><td>string[]</td><td>Array of commands to execute when the button is activated.</td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"components\": {\n    \"button\": {\n      \"text\": \"Start Game\",\n      \"onClick\": [\"loadScene main_level\", \"playSound ui_confirm\"]\n    }\n  }\n}</code></pre>"
+}

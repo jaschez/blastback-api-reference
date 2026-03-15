@@ -1,0 +1,11 @@
+{
+  "title": "Comic",
+  "slug": "reference/components/comic",
+  "section": "Components",
+  "subsection": "UI",
+  "order": 5,
+  "navTitle": "Comic",
+  "description": "Comic and dialogue panel UI component for narrative sequences.",
+  "keywords": ["comic", "ui", "panel", "dialogue", "narrative", "cutscene", "story"],
+  "content": "<h1 id=\"comic\">Comic</h1>\n<p class=\"page-subtitle\">Comic and dialogue panel UI component for displaying narrative sequences and story panels.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-ui\">UI</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>\"comic\": {\n  \"panels\": [],\n  \"autoAdvance\": false,\n  \"advanceDelay\": 0.0\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>Comic</strong> component displays comic-style panels and dialogue sequences in the UI. It supports panel transitions, speech bubbles, and sequential storytelling elements for narrative cutscenes and in-game comic presentations. Panels can be advanced manually by player input or automatically after a configurable delay.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td>panels</td><td>array</td><td>Array of panel objects defining the comic sequence.</td></tr>\n<tr><td>autoAdvance</td><td>bool</td><td>Whether panels advance automatically without player input.</td></tr>\n<tr><td>advanceDelay</td><td>float</td><td>Time in seconds before auto-advancing to the next panel.</td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"components\": {\n    \"comic\": {\n      \"panels\": [\n        { \"image\": \"intro_panel_1\", \"text\": \"In a world of chaos...\" },\n        { \"image\": \"intro_panel_2\", \"text\": \"One hero rises.\" }\n      ],\n      \"autoAdvance\": false,\n      \"advanceDelay\": 3.0\n    }\n  }\n}</code></pre>"
+}

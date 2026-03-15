@@ -1,0 +1,11 @@
+{
+  "title": "Control Handler",
+  "slug": "reference/components/control-handler",
+  "section": "Components",
+  "subsection": "Mob",
+  "order": 2,
+  "navTitle": "ControlHandler",
+  "description": "Manages entity control states and transitions.",
+  "keywords": ["control", "handler", "state", "transitions", "control handler"],
+  "content": "<h1 id=\"title\">Control Handler</h1>\n<p class=\"page-subtitle\">Manages entity control states and transitions.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-mob\">Mob</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"controlHandler\": {\n    \"defaultState\": \"idle\"\n  }\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>Control Handler</strong> component manages entity control states and transitions. It defines the default control state and handles switching between different states during gameplay.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td><code>defaultState</code></td><td><code>string</code></td><td>The initial control state the entity starts in.</td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"controlHandler\": {\n    \"defaultState\": \"idle\"\n  }\n}</code></pre>"
+}

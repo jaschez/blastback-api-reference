@@ -1,0 +1,11 @@
+{
+  "title": "Weapon Handler",
+  "slug": "reference/components/weapon-handler",
+  "section": "Components",
+  "subsection": "Mob",
+  "order": 9,
+  "navTitle": "WeaponHandler",
+  "description": "Manages weapon equipping, switching, and usage for entities.",
+  "keywords": ["weapon", "handler", "equip", "switch", "combat", "inventory"],
+  "content": "<h1 id=\"title\">Weapon Handler</h1>\n<p class=\"page-subtitle\">Manages weapon equipping, switching, and usage for entities.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-mob\">Mob</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"weaponHandler\": {}\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>Weapon Handler</strong> component manages weapon equipping, switching, and usage for entities. It serves as the bridge between an entity and its weapons, handling the logic for selecting and using different weapons during gameplay.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td colspan=\"3\"><em>Weapon handler configuration is managed through weapon components attached to the entity.</em></td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"weaponHandler\": {}\n}</code></pre>"
+}

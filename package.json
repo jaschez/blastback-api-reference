@@ -1,0 +1,10 @@
+{
+  "name": "blastback-engine-docs",
+  "version": "1.0.0",
+  "description": "Blastback Engine - Lua Scripting & Modding Documentation",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "dev": "node scripts/build.js --watch"
+  },
+  "private": true
+}

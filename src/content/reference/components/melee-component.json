@@ -1,0 +1,11 @@
+{
+  "title": "Melee Component",
+  "slug": "reference/components/melee-component",
+  "section": "Components",
+  "subsection": "Weapon",
+  "order": 1,
+  "navTitle": "MeleeComponent",
+  "description": "Melee weapon behavior with attack patterns and hit detection.",
+  "keywords": ["melee", "weapon", "attack", "hit", "detection", "combat", "swing"],
+  "content": "<h1 id=\"title\">Melee Component</h1>\n<p class=\"page-subtitle\">Melee weapon behavior with attack patterns and hit detection.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-weapon\">Weapon</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"meleeComponent\": {}\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>Melee Component</strong> provides melee weapon behavior including attack patterns and hit detection. It handles close-range combat mechanics such as swing arcs, damage timing, and collision detection with targets.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td colspan=\"3\"><em>Melee behavior is configured through the weapon component and animator triggers.</em></td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"meleeComponent\": {}\n}</code></pre>"
+}

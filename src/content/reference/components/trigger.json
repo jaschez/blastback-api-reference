@@ -1,0 +1,11 @@
+{
+  "title": "Trigger",
+  "slug": "reference/components/trigger",
+  "section": "Components",
+  "subsection": "Common",
+  "order": 5,
+  "navTitle": "Trigger",
+  "description": "Listens and responds to trigger events.",
+  "keywords": ["trigger", "events", "commands", "listener", "response"],
+  "content": "<h1 id=\"title\">Trigger</h1>\n<p class=\"page-subtitle\">Listens and responds to trigger events.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-common\">Common</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"trigger\": {\n    \"events\": {\n      \"eventName\": [\"command1\", \"command2\"]\n    }\n  }\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>Trigger</strong> component listens for trigger events and responds by executing associated commands. It maps trigger event names to arrays of commands that are executed when the event fires.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td><code>events</code></td><td><code>Dictionary{string, string[]}</code></td><td>Maps trigger event names to arrays of commands to execute when the event is fired.</td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"trigger\": {\n    \"events\": {\n      \"onPlayerEnter\": [\"entity.animate alert,once\", \"sound.play alarm\"],\n      \"onPlayerExit\": [\"entity.animate idle,loop\"]\n    }\n  }\n}</code></pre>"
+}

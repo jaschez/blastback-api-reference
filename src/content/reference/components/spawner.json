@@ -1,0 +1,11 @@
+{
+  "title": "Spawner",
+  "slug": "reference/components/spawner",
+  "section": "Components",
+  "subsection": "Common",
+  "order": 4,
+  "navTitle": "Spawner",
+  "description": "Handles entity spawning logic.",
+  "keywords": ["spawner", "spawn", "entities", "delay", "count", "instantiate"],
+  "content": "<h1 id=\"title\">Spawner</h1>\n<p class=\"page-subtitle\">Handles entity spawning logic.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-common\">Common</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"spawner\": {\n    \"entities\": [\"entityID1\", \"entityID2\"],\n    \"spawnDelay\": 0.0,\n    \"maxCount\": 123\n  }\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>Spawner</strong> component handles entity spawning logic. It manages which entities to spawn, the delay between spawns, and the maximum number of entities that can be spawned.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td><code>entities</code></td><td><code>string[]</code></td><td>Array of entity IDs to spawn.</td></tr>\n<tr><td><code>spawnDelay</code></td><td><code>float</code></td><td>Delay in seconds between each spawn.</td></tr>\n<tr><td><code>maxCount</code></td><td><code>int</code></td><td>Maximum number of entities to spawn.</td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"spawner\": {\n    \"entities\": [\"enemy_goblin\", \"enemy_skeleton\"],\n    \"spawnDelay\": 2.5,\n    \"maxCount\": 10\n  }\n}</code></pre>"
+}

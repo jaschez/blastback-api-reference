@@ -1,0 +1,11 @@
+{
+  "title": "Player Movement",
+  "slug": "reference/components/player-movement",
+  "section": "Components",
+  "subsection": "Mob",
+  "order": 7,
+  "navTitle": "PlayerMovement",
+  "description": "Player-specific movement with dash and dodge abilities.",
+  "keywords": ["player", "movement", "dash", "dodge", "abilities", "player movement"],
+  "content": "<h1 id=\"title\">Player Movement</h1>\n<p class=\"page-subtitle\">Player-specific movement with dash and dodge abilities.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-mob\">Mob</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"playerMovement\": {}\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>Player Movement</strong> component extends base movement with player-specific abilities such as dashing and dodging. It provides enhanced movement mechanics designed for player-controlled entities.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td colspan=\"3\"><em>Inherits base movement properties. Player-specific abilities are configured through the control handler.</em></td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"playerMovement\": {}\n}</code></pre>"
+}

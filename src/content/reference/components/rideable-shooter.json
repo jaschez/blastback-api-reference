@@ -1,0 +1,11 @@
+{
+  "title": "Rideable Shooter",
+  "slug": "reference/components/rideable-shooter",
+  "section": "Components",
+  "subsection": "Weapon",
+  "order": 2,
+  "navTitle": "RideableShooter",
+  "description": "Shooter component for rideable/mountable entities.",
+  "keywords": ["rideable", "shooter", "mount", "weapon", "turret"],
+  "content": "<h1 id=\"rideable-shooter\">Rideable Shooter</h1>\n<p class=\"page-subtitle\">Shooter component for rideable or mountable entities, enabling mounted weapon systems.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-weapon\">Weapon</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>\"rideableShooter\": {\n  \"projectileEntity\": \"...\",\n  \"fireRate\": 0.0,\n  \"spread\": 0.0\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>RideableShooter</strong> component enables entities to function as mounted weapon platforms. When a mob entity rides or mounts another entity equipped with this component, they can control its shooting capabilities. This is commonly used for turrets, vehicles, and rideable creatures with ranged attacks.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td>projectileEntity</td><td>string</td><td>The entity ID of the projectile to fire.</td></tr>\n<tr><td>fireRate</td><td>float</td><td>Time in seconds between shots.</td></tr>\n<tr><td>spread</td><td>float</td><td>Angular spread of fired projectiles in degrees.</td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"components\": {\n    \"rideableShooter\": {\n      \"projectileEntity\": \"turret_bullet\",\n      \"fireRate\": 0.15,\n      \"spread\": 5.0\n    }\n  }\n}</code></pre>"
+}

@@ -1,0 +1,11 @@
+{
+  "title": "Bar",
+  "slug": "reference/components/bar",
+  "section": "Components",
+  "subsection": "UI",
+  "order": 3,
+  "navTitle": "Bar",
+  "description": "Progress or health bar UI element for displaying values visually.",
+  "keywords": ["bar", "ui", "health", "progress", "meter", "resource"],
+  "content": "<h1 id=\"bar\">Bar</h1>\n<p class=\"page-subtitle\">Progress or health bar UI element for displaying numeric values as a filled bar.</p>\n<span class=\"tag tag-component\">Component</span> <span class=\"tag tag-ui\">UI</span>\n\n<h2 id=\"schema\">Schema</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>\"bar\": {\n  \"value\": 0.0,\n  \"maxValue\": 0.0,\n  \"color\": \"...\",\n  \"direction\": \"...\"\n}</code></pre>\n\n<h2 id=\"description\">Description</h2>\n<p>The <strong>Bar</strong> component is a UI element for displaying progress or resource values visually as a filled bar. It renders a fillable bar commonly used for health bars, mana bars, experience bars, stamina indicators, and other progress displays. The bar fills proportionally based on the ratio of the current value to the maximum value.</p>\n\n<h2 id=\"fields\">Fields</h2>\n<div class=\"table-wrapper\"><table>\n<thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead>\n<tbody>\n<tr><td>value</td><td>float</td><td>The current value of the bar.</td></tr>\n<tr><td>maxValue</td><td>float</td><td>The maximum value the bar can represent.</td></tr>\n<tr><td>color</td><td>string</td><td>The fill color of the bar (e.g., \"#ff0000\", \"red\").</td></tr>\n<tr><td>direction</td><td>string</td><td>The fill direction of the bar (\"left\", \"right\", \"up\", \"down\").</td></tr>\n</tbody>\n</table></div>\n\n<h2 id=\"example\">Example</h2>\n<div class=\"code-header\"><span>JSON</span></div>\n<pre><code>{\n  \"components\": {\n    \"bar\": {\n      \"value\": 75.0,\n      \"maxValue\": 100.0,\n      \"color\": \"#e74c3c\",\n      \"direction\": \"right\"\n    }\n  }\n}</code></pre>"
+}
